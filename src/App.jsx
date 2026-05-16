@@ -51,18 +51,18 @@ const materialThemeStyles = `
     --md-sys-color-on-error-container: #ffdad6;
   }
 
-  .bg-surface { background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface); transition: var(--transition-colors); }
-  .bg-surface-variant { background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface); transition: var(--transition-colors); }
+  .bg-white/5 backdrop-blur-md border border-white/10 shadow-xl { background-color: var(--md-sys-color-surface); color: var(--md-sys-color-on-surface); transition: var(--transition-colors); }
+  .bg-white/5 backdrop-blur-md border border-white/10 shadow-xl { background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface); transition: var(--transition-colors); }
   .bg-primary { background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); transition: var(--transition-colors); }
-  .bg-primary-container { background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); transition: var(--transition-colors); }
-  .bg-secondary-container { background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); transition: var(--transition-colors); }
+  .bg-white/5 backdrop-blur-md border border-white/10 shadow-xl { background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); transition: var(--transition-colors); }
+  .bg-white/5 backdrop-blur-md border border-white/10 shadow-xl { background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); transition: var(--transition-colors); }
   
   /* Nouvelles classes de Dégradé (Gradient) */
-  .bg-gradient-primary { 
+  .bg-gradient-to-r from-purple-500 to-pink-500 text-white { 
     background: var(--theme-gradient); 
     color: #ffffff; 
   }
-  .text-gradient-primary { 
+  .bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 { 
     background: var(--theme-gradient); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
@@ -71,9 +71,9 @@ const materialThemeStyles = `
   }
   
   .text-primary { color: var(--md-sys-color-primary); transition: var(--transition-colors); }
-  .text-on-surface-variant { color: var(--md-sys-color-on-surface-variant); transition: var(--transition-colors); }
-  .text-on-primary-container { color: var(--md-sys-color-on-primary-container); transition: var(--transition-colors); }
-  .border-outline { border-color: var(--md-sys-color-outline); transition: var(--transition-colors); }
+  .text-white-variant { color: var(--md-sys-color-on-surface-variant); transition: var(--transition-colors); }
+  .text-white { color: var(--md-sys-color-on-primary-container); transition: var(--transition-colors); }
+  .border-white/10 { border-color: var(--md-sys-color-outline); transition: var(--transition-colors); }
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar { width: 8px; }
@@ -141,7 +141,7 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="zen-grid-bg w-full max-w-sm rounded-[40px] shadow-2xl flex flex-col items-center p-6 relative overflow-hidden border border-white/10 animate-in zoom-in-95 duration-300">
+      <div className="bg-black/40 backdrop-blur-xl w-full max-w-sm rounded-[40px] shadow-2xl flex flex-col items-center p-6 relative overflow-hidden border border-white/10 animate-in zoom-in-95 duration-300">
         
         <button onClick={onClose} className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-10">
           <X size={20} />
@@ -302,7 +302,7 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
 
   if (!compact && isImage) {
     return (
-      <div className="relative group rounded-2xl overflow-hidden border border-outline/20 bg-surface">
+      <div className="relative group rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl">
         <img src={file.dataUrl} alt={file.name} className="w-full max-h-[400px] object-contain bg-black/5" />
         <div className="absolute top-0 left-0 right-0 p-3 bg-gradient-to-b from-black/60 to-transparent flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
           <span className="text-white text-sm font-medium truncate px-2">{file.name}</span>
@@ -318,9 +318,9 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
 
   if (!compact && isPDF) {
     return (
-      <div className="relative group rounded-2xl overflow-hidden border border-outline/20 bg-surface h-[500px] flex flex-col">
-        <div className="p-3 bg-surface-variant flex justify-between items-center border-b border-outline/10">
-          <div className="flex items-center gap-2 text-on-surface">
+      <div className="relative group rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl h-[500px] flex flex-col">
+        <div className="p-3 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl flex justify-between items-center border-b border-white/10">
+          <div className="flex items-center gap-2 text-white">
              <File size={18} className="text-red-500" />
              <span className="font-medium text-sm truncate">{file.name}</span>
           </div>
@@ -336,14 +336,14 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
   }
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl bg-surface border border-outline/20 shadow-sm relative group">
+    <div className="flex items-center justify-between p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl border border-white/10 shadow-sm relative group">
       <div className="flex items-center gap-3 overflow-hidden">
-        <div className={`p-3 rounded-xl bg-surface-variant ${colorClass}`}>
+        <div className={`p-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl ${colorClass}`}>
           <Icon size={24} />
         </div>
         <div className="flex flex-col overflow-hidden">
-          <span className="font-medium text-on-surface truncate">{file.name}</span>
-          <span className="text-xs text-on-surface-variant uppercase tracking-wider">
+          <span className="font-medium text-white truncate">{file.name}</span>
+          <span className="text-xs text-white-variant uppercase tracking-wider">
             {isImage ? 'Image' : isPDF ? 'Document PDF' : isWord ? 'Document Word' : isExcel ? 'Classeur Excel' : isPPT ? 'Présentation' : 'Fichier attaché'}
           </span>
         </div>
@@ -370,7 +370,7 @@ const InstructionsWidget = () => {
   ];
 
   return (
-    <div className="md:col-span-2 bg-primary-container rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-around shadow-sm min-h-[160px] gap-4">
+    <div className="md:col-span-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-around shadow-sm min-h-[160px] gap-4">
       {modes.map((mode) => {
         const Icon = mode.icon;
         const isActive = activeMode === mode.id;
@@ -379,13 +379,13 @@ const InstructionsWidget = () => {
           <button 
             key={mode.id}
             onClick={() => setActiveMode(isActive ? null : mode.id)}
-            className={`flex-1 text-center p-4 md:p-6 w-full rounded-2xl transition-all duration-300 border border-transparent ${isActive ? 'bg-gradient-primary scale-[1.02] shadow-xl border-outline/20' : isDimmed ? 'opacity-40 hover:opacity-70' : 'hover:bg-white/20'}`}
+            className={`flex-1 text-center p-4 md:p-6 w-full rounded-2xl transition-all duration-300 border border-transparent ${isActive ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-[1.02] shadow-xl border-white/10' : isDimmed ? 'opacity-40 hover:opacity-70' : 'hover:bg-white/20'}`}
           >
-            <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3 shadow-sm transition-colors ${isActive ? 'bg-[var(--md-sys-color-on-primary)] text-primary' : 'bg-surface text-primary'}`}>
+            <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3 shadow-sm transition-colors ${isActive ? 'bg-[var(--md-sys-color-on-primary)] text-primary' : 'bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-primary'}`}>
               <Icon size={32} />
             </div>
-            <span className={`font-bold block ${isActive ? 'text-white' : 'text-on-primary-container'}`}>{mode.title}</span>
-            <span className={`text-sm mt-1 block ${isActive ? 'text-white/90' : 'text-on-primary-container opacity-80'}`}>{mode.desc}</span>
+            <span className={`font-bold block ${isActive ? 'text-white' : 'text-white'}`}>{mode.title}</span>
+            <span className={`text-sm mt-1 block ${isActive ? 'text-white/90' : 'text-white opacity-80'}`}>{mode.desc}</span>
           </button>
         )
       })}
@@ -430,7 +430,7 @@ const GroupMakerWidget = ({ classes }) => {
   };
 
   return (
-    <div className="bg-surface-variant rounded-3xl p-6 flex flex-col shadow-sm h-full max-h-[400px]">
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 flex flex-col shadow-sm h-full max-h-[400px]">
       <div className="flex items-center gap-2 mb-4">
         <Users className="text-primary" size={24} />
         <h3 className="font-semibold text-lg flex-1">Générateur de Groupes</h3>
@@ -440,15 +440,15 @@ const GroupMakerWidget = ({ classes }) => {
         <div className="flex-1 flex flex-col overflow-hidden">
            <div className="flex-1 overflow-y-auto pr-2 grid grid-cols-2 gap-2 mb-4">
               {groups.map((g, i) => (
-                <div key={i} className="bg-surface p-3 rounded-xl border border-outline/10 text-sm">
-                  <div className="font-bold text-gradient-primary mb-1 border-b border-outline/10 pb-1">Groupe {i+1}</div>
-                  <ul className="text-on-surface">
+                <div key={i} className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 rounded-xl border border-white/10 text-sm">
+                  <div className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-1 border-b border-white/10 pb-1">Groupe {i+1}</div>
+                  <ul className="text-white">
                     {g.map((name, j) => <li key={j}>• {name}</li>)}
                   </ul>
                 </div>
               ))}
            </div>
-           <button onClick={() => setIsGenerated(false)} className="w-full py-3 bg-surface rounded-full text-on-surface hover:bg-secondary-container transition-colors font-medium border border-outline/10">
+           <button onClick={() => setIsGenerated(false)} className="w-full py-3 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-full text-white hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl transition-colors font-medium border border-white/10">
              Modifier / Recommencer
            </button>
         </div>
@@ -457,7 +457,7 @@ const GroupMakerWidget = ({ classes }) => {
             <select 
               value={selectedSource} 
               onChange={handleSourceChange}
-              className="w-full bg-surface p-2 rounded-xl text-sm border border-outline/10 focus:ring-2 focus:ring-primary text-on-surface outline-none shadow-inner"
+              className="w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-xl text-sm border border-white/10 focus:ring-2 focus:ring-primary text-white outline-none shadow-inner"
             >
               <option value="manual">-- Liste manuelle --</option>
               {classes.map(c => (
@@ -471,21 +471,21 @@ const GroupMakerWidget = ({ classes }) => {
                 setNames(e.target.value);
                 setSelectedSource("manual"); // Repasse en manuel si on édite
               }}
-              className="flex-1 w-full bg-surface rounded-2xl p-4 resize-none border border-outline/10 focus:ring-2 focus:ring-primary text-sm text-on-surface outline-none shadow-inner"
+              className="flex-1 w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl p-4 resize-none border border-white/10 focus:ring-2 focus:ring-primary text-sm text-white outline-none shadow-inner"
               placeholder="Liste des élèves (un par ligne)..."
             />
-            <div className="flex items-center gap-2 bg-surface p-2 rounded-2xl shadow-inner border border-outline/10">
-              <label className="text-sm text-on-surface-variant ml-2 flex-1">Nb. de groupes :</label>
+            <div className="flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-2xl shadow-inner border border-white/10">
+              <label className="text-sm text-white-variant ml-2 flex-1">Nb. de groupes :</label>
               <input 
                 type="number" min="2" max="15" 
                 value={numGroups} onChange={(e) => setNumGroups(parseInt(e.target.value)||2)}
-                className="w-16 text-center bg-transparent border-none focus:ring-0 text-on-surface font-bold outline-none"
+                className="w-16 text-center bg-transparent border-none focus:ring-0 text-white font-bold outline-none"
               />
             </div>
             <button 
               onClick={generateGroups}
               disabled={names.trim().length === 0}
-              className="w-full py-4 bg-gradient-primary rounded-full font-semibold hover:opacity-90 transition-all shadow-md active:scale-[0.98]"
+              className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:opacity-90 transition-all shadow-md active:scale-[0.98]"
             >
               Créer les groupes
             </button>
@@ -520,31 +520,31 @@ const TimerWidget = () => {
   };
 
   return (
-    <div className="bg-surface-variant rounded-3xl p-6 flex flex-col items-center justify-center shadow-sm h-full">
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 flex flex-col items-center justify-center shadow-sm h-full">
       <div className="flex items-center gap-2 mb-4 w-full">
         <Clock className="text-primary" size={24} />
         <h3 className="font-semibold text-lg">Chronomètre</h3>
       </div>
-      <div className="text-6xl font-bold font-mono tracking-tighter text-gradient-primary mb-6">
+      <div className="text-6xl font-bold font-mono tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-6">
         {formatTime(time)}
       </div>
       <div className="flex gap-4 mb-4">
-        <button onClick={toggle} className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center hover:opacity-90 shadow-md transition-transform active:scale-95">
+        <button onClick={toggle} className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center hover:opacity-90 shadow-md transition-transform active:scale-95">
           {isActive ? <Pause fill="white" size={24} /> : <Play fill="white" size={24} className="ml-1" />}
         </button>
-        <button onClick={reset} className="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95">
-          <RotateCcw size={24} className="text-on-secondary-container" />
+        <button onClick={reset} className="w-16 h-16 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95">
+          <RotateCcw size={24} className="text-white" />
         </button>
       </div>
       {!isActive && (
-        <div className="flex items-center gap-2 mt-4 bg-surface p-2 rounded-2xl shadow-inner">
+        <div className="flex items-center gap-2 mt-4 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-2xl shadow-inner">
           <input 
             type="number" min="1" max="90" value={inputMinutes} 
             onChange={(e) => setInputMinutes(parseInt(e.target.value) || 1)}
-            className="w-16 text-center bg-transparent border-none focus:ring-0 text-on-surface font-semibold outline-none"
+            className="w-16 text-center bg-transparent border-none focus:ring-0 text-white font-semibold outline-none"
           />
-          <span className="text-sm text-on-surface-variant">min</span>
-          <button onClick={reset} className="ml-2 text-primary p-2 hover:bg-primary-container rounded-xl transition-colors">
+          <span className="text-sm text-white-variant">min</span>
+          <button onClick={reset} className="ml-2 text-primary p-2 hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-xl transition-colors">
             <CheckCircle2 size={20} />
           </button>
         </div>
@@ -586,22 +586,22 @@ const RandomPickerWidget = ({ classes }) => {
   };
 
   return (
-    <div className="bg-surface-variant rounded-3xl p-6 flex flex-col shadow-sm h-full">
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 flex flex-col shadow-sm h-full">
       <div className="flex items-center gap-2 mb-4">
         <Users className="text-primary" size={24} />
         <h3 className="font-semibold text-lg flex-1">Tirage au sort</h3>
       </div>
       <div className="flex-1 flex flex-col gap-4">
         {selected ? (
-          <div className="flex-1 bg-primary-container rounded-2xl flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-300 shadow-inner">
-            <span className="text-sm text-on-primary-container opacity-80 mb-2">
+          <div className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-300 shadow-inner">
+            <span className="text-sm text-white opacity-80 mb-2">
               {isPicking ? "Sélection en cours..." : "L'élève choisi est :"}
             </span>
-            <span className="text-4xl font-bold text-gradient-primary">{selected}</span>
+            <span className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">{selected}</span>
             {!isPicking && (
               <button 
                 onClick={() => setSelected(null)}
-                className="mt-6 text-sm px-4 py-2 bg-surface rounded-full shadow-sm hover:bg-secondary-container transition-colors text-on-surface"
+                className="mt-6 text-sm px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-full shadow-sm hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl transition-colors text-white"
               >
                 Retour à la liste
               </button>
@@ -612,7 +612,7 @@ const RandomPickerWidget = ({ classes }) => {
             <select 
               value={selectedSource} 
               onChange={handleSourceChange}
-              className="w-full bg-surface p-2 rounded-xl text-sm border border-outline/10 focus:ring-2 focus:ring-primary text-on-surface outline-none shadow-inner"
+              className="w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-xl text-sm border border-white/10 focus:ring-2 focus:ring-primary text-white outline-none shadow-inner"
             >
               <option value="manual">-- Liste manuelle --</option>
               {classes.map(c => (
@@ -625,7 +625,7 @@ const RandomPickerWidget = ({ classes }) => {
                 setNames(e.target.value);
                 setSelectedSource("manual");
               }}
-              className="flex-1 w-full bg-surface rounded-2xl p-4 resize-none border border-outline/10 focus:border-transparent focus:ring-2 focus:ring-[var(--md-sys-color-primary)] text-sm text-on-surface shadow-inner outline-none"
+              className="flex-1 w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl p-4 resize-none border border-white/10 focus:border-transparent focus:ring-2 focus:ring-[var(--md-sys-color-primary)] text-sm text-white shadow-inner outline-none"
               placeholder="Collez votre liste d'élèves ici (un par ligne)..."
             />
           </>
@@ -633,7 +633,7 @@ const RandomPickerWidget = ({ classes }) => {
         <button 
           onClick={pickRandom}
           disabled={isPicking || names.trim().length === 0}
-          className="w-full py-4 bg-gradient-primary rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-[0.98]"
+          className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-[0.98]"
         >
           <Shuffle size={20} /> Tirer au sort
         </button>
@@ -714,7 +714,7 @@ const NoiseMeterWidget = () => {
   if (volume > 75) { barColor = "bg-red-500"; statusText = "Trop bruyant !"; }
 
   return (
-    <div className="bg-surface-variant rounded-3xl p-6 flex flex-col shadow-sm h-full">
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 flex flex-col shadow-sm h-full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Mic className="text-primary" size={24} />
@@ -723,23 +723,23 @@ const NoiseMeterWidget = () => {
         <button 
           onClick={isListening ? stopListening : startListening}
           className={`p-3 rounded-full flex items-center justify-center transition-colors shadow-sm ${
-            isListening ? 'bg-[var(--md-sys-color-error-container)] text-[var(--md-sys-color-on-error-container)]' : 'bg-primary-container text-on-primary-container hover:opacity-80'
+            isListening ? 'bg-[var(--md-sys-color-error-container)] text-[var(--md-sys-color-on-error-container)]' : 'bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white hover:opacity-80'
           }`}
         >
           {isListening ? <VolumeX size={20} /> : <Volume2 size={20} />}
         </button>
       </div>
       <div className="flex-1 flex flex-col items-center justify-center gap-6">
-        <div className="w-full h-8 bg-surface rounded-full overflow-hidden border border-outline/20 shadow-inner">
+        <div className="w-full h-8 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-full overflow-hidden border border-white/10 shadow-inner">
           <div className={`h-full transition-all duration-100 ease-out ${barColor}`} style={{ width: `${Math.max(5, volume)}%` }} />
         </div>
         <div className="text-center">
-          <div className="text-3xl font-bold text-gradient-primary mb-1">{volume} %</div>
-          <div className="text-sm font-medium text-on-surface-variant uppercase tracking-wider">{statusText}</div>
+          <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-1">{volume} %</div>
+          <div className="text-sm font-medium text-white-variant uppercase tracking-wider">{statusText}</div>
         </div>
       </div>
       {!isListening && (
-        <p className="text-xs text-center text-on-surface-variant mt-4 opacity-70">
+        <p className="text-xs text-center text-white-variant mt-4 opacity-70">
           Cliquez sur l'icône pour activer le microphone.
         </p>
       )}
@@ -847,9 +847,9 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
       
       {/* Sidebar Classes */}
       <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-4">
-        <div className="bg-surface-variant rounded-3xl p-4 shadow-sm">
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-4 px-2">
-            <h2 className="font-bold text-lg text-on-surface flex items-center gap-2">
+            <h2 className="font-bold text-lg text-white flex items-center gap-2">
               <Users size={20} className="text-primary"/> Mes Classes
             </h2>
           </div>
@@ -861,8 +861,8 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 onClick={() => { setSelectedClassId(c.id); setActiveSubTab('feed'); }}
                 className={`flex items-center justify-between px-4 py-3 rounded-2xl transition-all ${
                   selectedClassId === c.id 
-                    ? 'bg-gradient-primary shadow-md font-medium' 
-                    : 'hover:bg-surface text-on-surface-variant'
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md font-medium' 
+                    : 'hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white-variant'
                 }`}
               >
                 <span>{c.name}</span>
@@ -876,19 +876,19 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                   type="text" autoFocus
                   value={newClassName} onChange={(e) => setNewClassName(e.target.value)}
                   placeholder="Nom de la classe..."
-                  className="flex-1 bg-surface p-2 rounded-xl text-sm border border-outline/20 focus:border-primary focus:ring-1 focus:ring-primary text-on-surface outline-none"
+                  className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-xl text-sm border border-white/10 focus:border-primary focus:ring-1 focus:ring-primary text-white outline-none"
                 />
-                <button type="submit" className="p-2 bg-gradient-primary rounded-xl shadow-sm hover:opacity-90 transition-opacity">
+                <button type="submit" className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm hover:opacity-90 transition-opacity">
                   <CheckCircle2 size={16} />
                 </button>
-                <button type="button" onClick={() => setIsAddingClass(false)} className="p-2 bg-surface text-on-surface-variant rounded-xl shadow-sm hover:bg-outline/10 transition-colors">
+                <button type="button" onClick={() => setIsAddingClass(false)} className="p-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white-variant rounded-xl shadow-sm hover:bg-outline/10 transition-colors">
                   <X size={16} />
                 </button>
               </form>
             ) : (
               <button 
                 onClick={() => setIsAddingClass(true)}
-                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-dashed border-outline/30 text-on-surface-variant hover:bg-surface hover:text-primary transition-colors"
+                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-dashed border-white/10 text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl hover:text-primary transition-colors"
               >
                 <Plus size={18} /> Ajouter une classe
               </button>
@@ -902,23 +902,23 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
         {selectedClass ? (
           <>
             {/* Header & SubTabs */}
-            <div className="bg-surface-variant rounded-3xl p-4 shadow-sm flex flex-col gap-4">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-4 shadow-sm flex flex-col gap-4">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <h2 className="font-bold text-xl text-on-surface">Classe : {selectedClass.name}</h2>
+                  <h2 className="font-bold text-xl text-white">Classe : {selectedClass.name}</h2>
                 </div>
                 
                 {/* Sub-navigation Tabs */}
-                <div className="flex bg-surface p-1 rounded-2xl shadow-inner border border-outline/10">
+                <div className="flex bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-1 rounded-2xl shadow-inner border border-white/10">
                   <button 
                     onClick={() => setActiveSubTab('feed')}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'feed' ? 'bg-primary text-white shadow-md' : 'text-on-surface-variant hover:text-primary'}`}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'feed' ? 'bg-primary text-white shadow-md' : 'text-white-variant hover:text-primary'}`}
                   >
                     Documents & Cours
                   </button>
                   <button 
                     onClick={() => setActiveSubTab('students')}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'students' ? 'bg-primary text-white shadow-md' : 'text-on-surface-variant hover:text-primary'}`}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'students' ? 'bg-primary text-white shadow-md' : 'text-white-variant hover:text-primary'}`}
                   >
                     Liste des Élèves
                   </button>
@@ -928,24 +928,24 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
             {/* Content Switch based on SubTab */}
             {activeSubTab === 'students' ? (
-              <div className="bg-surface rounded-3xl p-6 shadow-sm border border-outline/10 flex-1 flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 shadow-sm border border-white/10 flex-1 flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-lg text-primary flex items-center gap-2">
                     <Users size={20} /> Gestion des élèves
                   </h3>
-                  <span className="text-sm font-medium bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full shadow-inner">
+                  <span className="text-sm font-medium bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white px-3 py-1 rounded-full shadow-inner">
                     {localStudentsText.split('\n').filter(n => n.trim()).length} élèves
                   </span>
                 </div>
                 
-                <p className="text-sm text-on-surface-variant">
+                <p className="text-sm text-white-variant">
                   Copiez-collez votre liste d'élèves ici. Saisissez <strong>un élève par ligne</strong>. Cette liste sera automatiquement proposée dans les outils "Tirage au sort" et "Générateur de groupes".
                 </p>
                 
                 <textarea
                   value={localStudentsText}
                   onChange={(e) => setLocalStudentsText(e.target.value)}
-                  className="flex-1 w-full bg-surface-variant rounded-2xl p-4 resize-none border border-outline/20 focus:border-primary focus:ring-2 focus:ring-primary text-on-surface shadow-inner outline-none min-h-[300px]"
+                  className="flex-1 w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl p-4 resize-none border border-white/10 focus:border-primary focus:ring-2 focus:ring-primary text-white shadow-inner outline-none min-h-[300px]"
                   placeholder="Ex:\nJean Dupont\nMarie Curie\nAlbert Einstein..."
                 />
 
@@ -957,7 +957,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                   )}
                   <button 
                     onClick={handleSaveStudents}
-                    className="px-6 py-3 rounded-full font-bold bg-gradient-primary shadow-md hover:opacity-90 flex items-center gap-2 transition-all active:scale-95"
+                    className="px-6 py-3 rounded-full font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md hover:opacity-90 flex items-center gap-2 transition-all active:scale-95"
                   >
                     Enregistrer la liste
                   </button>
@@ -967,16 +967,16 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
               /* SubTab : Feed (Cours & Documents) */
               <>
                 <div className="flex justify-end gap-2">
-                  <div className="flex items-center gap-3 bg-surface p-2 rounded-2xl border border-outline/10 shadow-inner">
+                  <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-2 rounded-2xl border border-white/10 shadow-inner">
                     <Calendar size={18} className="text-primary ml-2" />
                     <input 
                       type="date" 
                       value={filterDate} 
                       onChange={(e) => setFilterDate(e.target.value)}
-                      className="bg-transparent border-none focus:ring-0 text-sm text-on-surface cursor-pointer outline-none"
+                      className="bg-transparent border-none focus:ring-0 text-sm text-white cursor-pointer outline-none"
                     />
                     {filterDate && (
-                      <button onClick={() => setFilterDate("")} className="mr-2 text-on-surface-variant hover:text-[var(--md-sys-color-error)] transition-colors">
+                      <button onClick={() => setFilterDate("")} className="mr-2 text-white-variant hover:text-[var(--md-sys-color-error)] transition-colors">
                         <X size={16} />
                       </button>
                     )}
@@ -984,8 +984,8 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 </div>
 
                 {isAddingCourse ? (
-                  <form onSubmit={handleAddCourse} className="bg-primary-container rounded-3xl p-6 shadow-md animate-in slide-in-from-top-4 fade-in">
-                    <h3 className="font-bold text-on-primary-container mb-4 flex items-center gap-2">
+                  <form onSubmit={handleAddCourse} className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 shadow-md animate-in slide-in-from-top-4 fade-in">
+                    <h3 className="font-bold text-white mb-4 flex items-center gap-2">
                       <FileText size={20} /> Déposer un nouveau document
                     </h3>
                     <div className="flex flex-col gap-4">
@@ -993,22 +993,22 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                         <input 
                           type="text" placeholder="Titre du cours..." required
                           value={newCourse.title} onChange={(e) => setNewCourse({...newCourse, title: e.target.value})}
-                          className="flex-1 bg-surface p-3 rounded-2xl border border-outline/20 text-on-surface focus:ring-2 focus:ring-primary outline-none"
+                          className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-primary outline-none"
                         />
                         <input 
                           type="date" required
                           value={newCourse.date} onChange={(e) => setNewCourse({...newCourse, date: e.target.value})}
-                          className="bg-surface p-3 rounded-2xl border border-outline/20 text-on-surface focus:ring-2 focus:ring-primary outline-none"
+                          className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-primary outline-none"
                         />
                       </div>
                       
                       <textarea 
                         placeholder="Contenu du cours ou résumé (optionnel si fichier joint)..." rows="3"
                         value={newCourse.content} onChange={(e) => setNewCourse({...newCourse, content: e.target.value})}
-                        className="w-full bg-surface p-3 rounded-2xl border border-outline/20 text-on-surface focus:ring-2 focus:ring-primary outline-none resize-none"
+                        className="w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-primary outline-none resize-none"
                       />
 
-                      <div className="border-2 border-dashed border-outline/30 rounded-2xl p-4 bg-surface text-center relative overflow-hidden transition-colors hover:bg-surface-variant hover:border-primary">
+                      <div className="border-2 border-dashed border-white/10 rounded-2xl p-4 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-center relative overflow-hidden transition-colors hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl hover:border-primary">
                         <input 
                           type="file" 
                           ref={fileInputRef}
@@ -1017,7 +1017,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                           accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                         />
                         {!newCourse.file ? (
-                          <div className="flex flex-col items-center justify-center pointer-events-none text-on-surface-variant py-4">
+                          <div className="flex flex-col items-center justify-center pointer-events-none text-white-variant py-4">
                             <UploadCloud size={32} className="mb-2 opacity-70" />
                             <span className="font-medium text-sm">Cliquez ou glissez pour joindre un document</span>
                             <span className="text-xs opacity-70 mt-1">Images, PDF, Word, Excel, PowerPoint...</span>
@@ -1030,10 +1030,10 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                       </div>
 
                       <div className="flex justify-end gap-2 mt-2">
-                        <button type="button" onClick={() => setIsAddingCourse(false)} className="px-4 py-2 rounded-full font-medium text-on-surface-variant hover:bg-surface transition-colors">
+                        <button type="button" onClick={() => setIsAddingCourse(false)} className="px-4 py-2 rounded-full font-medium text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl transition-colors">
                           Annuler
                         </button>
-                        <button type="submit" disabled={!newCourse.title.trim()} className="px-6 py-2 rounded-full font-bold bg-gradient-primary shadow-md hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-all">
+                        <button type="submit" disabled={!newCourse.title.trim()} className="px-6 py-2 rounded-full font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-all">
                           <CheckCircle2 size={18} /> Publier
                         </button>
                       </div>
@@ -1042,10 +1042,10 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 ) : (
                   <button 
                     onClick={() => setIsAddingCourse(true)}
-                    className="bg-surface rounded-3xl p-4 shadow-sm border border-outline/10 text-on-surface-variant hover:text-primary transition-all flex items-center justify-center gap-2 group font-medium relative overflow-hidden"
+                    className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-4 shadow-sm border border-white/10 text-white-variant hover:text-primary transition-all flex items-center justify-center gap-2 group font-medium relative overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                    <div className="w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center group-hover:bg-gradient-primary group-hover:text-white transition-colors relative z-10">
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <div className="w-8 h-8 rounded-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-primary flex items-center justify-center group-hover:bg-gradient-to-r from-purple-500 to-pink-500 text-white group-hover:text-white transition-colors relative z-10">
                       <Plus size={20} />
                     </div>
                     <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-purple-500">
@@ -1056,26 +1056,26 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
                 <div className="flex-1 overflow-y-auto pr-2 flex flex-col gap-4 pb-10">
                   {filteredCourses.length === 0 ? (
-                    <div className="bg-surface-variant rounded-3xl p-10 text-center flex flex-col items-center justify-center text-on-surface-variant opacity-70 border border-dashed border-outline/20 h-full">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-white-variant opacity-70 border border-dashed border-white/10 h-full">
                       <Search size={48} className="mb-4 opacity-50" />
                       <p className="text-lg font-medium">Aucun cours trouvé.</p>
                       <p className="text-sm mt-1">{filterDate ? "Essayez une autre date." : "Commencez par déposer un premier document pour cette classe."}</p>
                     </div>
                   ) : (
                     filteredCourses.map(course => (
-                      <div key={course.id} className="bg-surface rounded-3xl p-6 shadow-sm border border-outline/10 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4">
+                      <div key={course.id} className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 shadow-sm border border-white/10 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4">
                         <div className="flex justify-between items-start">
-                          <h3 className="font-bold text-lg text-gradient-primary flex items-center gap-2">
-                            {course.file ? <Paperclip size={18} className="opacity-50 text-on-surface" /> : <BookOpen size={18} className="opacity-50 text-on-surface" />}
+                          <h3 className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 flex items-center gap-2">
+                            {course.file ? <Paperclip size={18} className="opacity-50 text-white" /> : <BookOpen size={18} className="opacity-50 text-white" />}
                             {course.title}
                           </h3>
-                          <span className="text-xs font-medium px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full flex items-center gap-1 shadow-inner">
+                          <span className="text-xs font-medium px-3 py-1 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white rounded-full flex items-center gap-1 shadow-inner">
                             <Calendar size={12} /> {new Date(course.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
                           </span>
                         </div>
 
                         {course.content && (
-                          <div className="text-on-surface bg-surface-variant p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-outline/5">
+                          <div className="text-white bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-white/10">
                             {course.content}
                           </div>
                         )}
@@ -1086,7 +1086,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
                         <button 
                           onClick={() => deleteCourse(course.id)}
-                          className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-surface"
+                          className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl"
                           title="Supprimer ce cours"
                         >
                           <Trash2 size={16} />
@@ -1099,9 +1099,9 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
             )}
           </>
         ) : (
-          <div className="bg-surface-variant rounded-3xl p-10 text-center flex flex-col items-center justify-center text-on-surface-variant h-full shadow-sm">
+          <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-white-variant h-full shadow-sm">
             <Users size={64} className="mb-4 text-primary opacity-50" />
-            <p className="text-xl font-bold text-on-surface mb-2">Aucune classe sélectionnée</p>
+            <p className="text-xl font-bold text-white mb-2">Aucune classe sélectionnée</p>
             <p className="text-md opacity-80">Sélectionnez une classe à gauche ou créez-en une nouvelle pour commencer.</p>
           </div>
         )}
@@ -1290,18 +1290,18 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
     const lines = text.split('\n');
     let html = [];
     lines.forEach((line, idx) => {
-      if (line.startsWith('### ')) { html.push(<h3 key={idx} className="text-gradient-primary">{line.substring(4).replace(/\*\*/g, '')}</h3>); }
+      if (line.startsWith('### ')) { html.push(<h3 key={idx} className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">{line.substring(4).replace(/\*\*/g, '')}</h3>); }
       else if (line.startsWith('## ')) { html.push(<h2 key={idx}>{line.substring(3).replace(/\*\*/g, '')}</h2>); }
       else if (line.startsWith('# ')) { html.push(<h1 key={idx}>{line.substring(2).replace(/\*\*/g, '')}</h1>); }
       else if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
         html.push(<li key={idx} dangerouslySetInnerHTML={{__html: parseInline(line.substring(2))}} className="ml-4 mb-2" />);
       }
-      else if (line.startsWith('---')) { html.push(<hr key={idx} className="my-6 border-outline/20" />); }
+      else if (line.startsWith('---')) { html.push(<hr key={idx} className="my-6 border-white/10" />); }
       else if (line.startsWith('**') && line.endsWith('**')) {
-        html.push(<p key={idx} className="font-bold mt-4 text-on-surface">{line.replace(/\*\*/g, '')}</p>);
+        html.push(<p key={idx} className="font-bold mt-4 text-white">{line.replace(/\*\*/g, '')}</p>);
       }
       else if (line.trim() !== "") {
-        html.push(<p key={idx} dangerouslySetInnerHTML={{__html: parseInline(line)}} className="mb-2 text-on-surface" />);
+        html.push(<p key={idx} dangerouslySetInnerHTML={{__html: parseInline(line)}} className="mb-2 text-white" />);
       }
     });
     return <div className="prose max-w-none">{html}</div>;
@@ -1311,25 +1311,25 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full min-h-[600px]">
-      <div className="col-span-1 bg-surface-variant rounded-3xl p-6 shadow-sm flex flex-col h-fit">
+      <div className="col-span-1 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-6 shadow-sm flex flex-col h-fit">
         <div className="flex items-center gap-2 mb-6">
           <Sparkles className="text-primary" size={24} />
-          <h2 className="font-bold text-xl text-on-surface">Studio IA ✨</h2>
+          <h2 className="font-bold text-xl text-white">Studio IA ✨</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-5">
           
           {/* SÉLECTION DE L'OUTIL IA */}
           <div className="space-y-3">
-            <label className="text-sm font-medium text-on-surface-variant flex items-center gap-2">
+            <label className="text-sm font-medium text-white-variant flex items-center gap-2">
               <Layers size={16} /> Outil Pédagogique
             </label>
             <div className="grid grid-cols-1 gap-2">
               <button 
                 type="button" onClick={() => setSelectedTool("quiz")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "quiz" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-outline/20 bg-surface text-on-surface-variant hover:bg-surface/80"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "quiz" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-white/10 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl/80"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "quiz" ? "bg-primary text-white" : "bg-surface-variant"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "quiz" ? "bg-primary text-white" : "bg-white/5 backdrop-blur-md border border-white/10 shadow-xl"}`}>
                   <ListChecks size={18} />
                 </div>
                 <div>
@@ -1340,9 +1340,9 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
               <button 
                 type="button" onClick={() => setSelectedTool("flashcards")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "flashcards" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-outline/20 bg-surface text-on-surface-variant hover:bg-surface/80"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "flashcards" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-white/10 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl/80"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "flashcards" ? "bg-primary text-white" : "bg-surface-variant"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "flashcards" ? "bg-primary text-white" : "bg-white/5 backdrop-blur-md border border-white/10 shadow-xl"}`}>
                   <BookOpen size={18} />
                 </div>
                 <div>
@@ -1353,9 +1353,9 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
               <button 
                 type="button" onClick={() => setSelectedTool("simplify")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "simplify" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-outline/20 bg-surface text-on-surface-variant hover:bg-surface/80"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "simplify" ? "border-primary bg-primary/10 text-primary shadow-sm" : "border-white/10 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl/80"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "simplify" ? "bg-primary text-white" : "bg-surface-variant"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "simplify" ? "bg-primary text-white" : "bg-white/5 backdrop-blur-md border border-white/10 shadow-xl"}`}>
                   <Lightbulb size={18} />
                 </div>
                 <div>
@@ -1367,13 +1367,13 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
           </div>
 
           <div className="space-y-2 mt-2">
-            <label className="text-sm font-medium text-on-surface-variant flex items-center gap-2">
+            <label className="text-sm font-medium text-white-variant flex items-center gap-2">
               <FileText size={16} /> Source du document
             </label>
             <div className="relative">
               <select 
                 value={sourceType} onChange={(e) => setSourceType(e.target.value)}
-                className="w-full bg-surface p-3 pr-10 rounded-2xl border border-outline/10 focus:ring-2 focus:ring-primary text-on-surface appearance-none outline-none shadow-inner"
+                className="w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 pr-10 rounded-2xl border border-white/10 focus:ring-2 focus:ring-primary text-white appearance-none outline-none shadow-inner"
               >
                 <option value="new">-- Coller un nouveau texte --</option>
                 {classes.map(c => {
@@ -1390,7 +1390,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
                   )
                 })}
               </select>
-              <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" />
+              <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-white-variant pointer-events-none" />
             </div>
           </div>
 
@@ -1398,7 +1398,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
             <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
               <textarea 
                 value={newText} onChange={(e) => setNewText(e.target.value)} rows="4"
-                className="w-full bg-surface p-3 rounded-2xl border border-outline/10 focus:ring-2 focus:ring-primary text-on-surface resize-none shadow-inner outline-none"
+                className="w-full bg-white/5 backdrop-blur-md border border-white/10 shadow-xl p-3 rounded-2xl border border-white/10 focus:ring-2 focus:ring-primary text-white resize-none shadow-inner outline-none"
                 placeholder="Collez ici le cours ou le texte sur lequel l'IA doit se baser..."
               />
             </div>
@@ -1406,11 +1406,11 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
           {(selectedTool === "quiz" || selectedTool === "flashcards") && (
             <div className="space-y-2 mb-2 animate-in fade-in">
-              <label className="text-sm font-medium text-on-surface-variant flex items-center justify-between">
+              <label className="text-sm font-medium text-white-variant flex items-center justify-between">
                 <span className="flex items-center gap-2">
                   <ListChecks size={16} /> Quantité générée
                 </span>
-                <span className="font-bold text-gradient-primary">{numItems} {selectedTool === "quiz" ? "questions" : "cartes"}</span>
+                <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">{numItems} {selectedTool === "quiz" ? "questions" : "cartes"}</span>
               </label>
               <input 
                 type="range" min="3" max="15" step="1"
@@ -1422,7 +1422,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
           <button 
             type="submit" disabled={loading || (sourceType === 'new' && !newText.trim())}
-            className="mt-auto w-full py-4 bg-gradient-primary rounded-full font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-95"
+            className="mt-auto w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-95"
           >
             {loading ? (
               <span className="animate-pulse flex items-center gap-2 text-white">
@@ -1436,9 +1436,9 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
         </form>
       </div>
 
-      <div className="col-span-1 lg:col-span-2 bg-surface rounded-3xl p-8 border border-outline/10 shadow-inner overflow-y-auto relative h-[600px] lg:h-auto">
+      <div className="col-span-1 lg:col-span-2 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-3xl p-8 border border-white/10 shadow-inner overflow-y-auto relative h-[600px] lg:h-auto">
         {!result && !loading && !error && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-on-surface-variant opacity-50 p-6 text-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white-variant opacity-50 p-6 text-center">
             <Sparkles size={64} className="mb-4 opacity-50 text-primary" />
             <p className="text-lg font-medium">Sélectionnez un outil, une source et lancez la génération.</p>
             <p className="text-sm mt-2">Le matériel pédagogique généré s'affichera ici.</p>
@@ -1459,7 +1459,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
         )}
 
         {result && !loading && (
-          <div className="animate-in slide-in-from-bottom-4 duration-500 bg-surface">
+          <div className="animate-in slide-in-from-bottom-4 duration-500 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl">
             {renderMarkdown(result)}
           </div>
         )}
@@ -1577,22 +1577,22 @@ export default function App() {
     <>
       <style>{materialThemeStyles}</style>
       
-      <div className={`theme-wrapper ${isDark ? 'dark' : ''} min-h-screen bg-surface font-sans flex transition-colors duration-300`}>
+      <div className={`theme-wrapper dark min-h-screen bg-gradient-to-br from-neutral-900 to-black font-sans flex transition-colors duration-300 text-white`}>
         
         {/* Sidebar */}
-        <aside className="w-20 md:w-64 bg-surface-variant border-r border-outline/10 flex flex-col p-4 z-20 transition-all duration-300 shadow-sm">
+        <aside className="w-20 md:w-64 bg-black/30 backdrop-blur-xl border-r border-white/10 flex flex-col p-4 z-20 transition-all duration-300 shadow-xl">
           <div className="flex items-center justify-center md:justify-start gap-3 p-2 mb-8 mt-4">
-            <div className="w-10 h-10 min-w-[40px] rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 min-w-[40px] rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center shadow-lg">
               <GraduationCap size={24} className="text-white" />
             </div>
-            <h1 className="font-bold text-xl hidden md:block text-gradient-primary tracking-tight">EduDash</h1>
+            <h1 className="font-bold text-xl hidden md:block bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 tracking-tight">EduDash</h1>
           </div>
 
           <nav className="flex-1 flex flex-col gap-2">
             <button 
               onClick={() => setActiveTab('classes')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'classes' ? 'bg-primary-container text-on-primary-container font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface hover:text-on-surface'
+                activeTab === 'classes' ? 'bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white font-bold shadow-sm' : 'text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl hover:text-white'
               }`}
               title="Mes Classes"
             >
@@ -1603,7 +1603,7 @@ export default function App() {
             <button 
               onClick={() => setActiveTab('tools')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'tools' ? 'bg-primary-container text-on-primary-container font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface hover:text-on-surface'
+                activeTab === 'tools' ? 'bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white font-bold shadow-sm' : 'text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl hover:text-white'
               }`}
               title="Outils"
             >
@@ -1614,7 +1614,7 @@ export default function App() {
             <button 
               onClick={() => setActiveTab('ai')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'ai' ? 'bg-primary-container text-on-primary-container font-bold shadow-sm' : 'text-on-surface-variant hover:bg-surface hover:text-on-surface'
+                activeTab === 'ai' ? 'bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white font-bold shadow-sm' : 'text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl hover:text-white'
               }`}
               title="Studio IA"
             >
@@ -1626,7 +1626,7 @@ export default function App() {
           <div className="mt-auto">
             <button 
               onClick={() => setShowSettingsModal(true)}
-              className="flex items-center justify-center md:justify-start gap-4 p-4 rounded-full w-full text-on-surface-variant hover:bg-surface-variant transition-colors"
+              className="flex items-center justify-center md:justify-start gap-4 p-4 rounded-full w-full text-white-variant hover:bg-white/5 backdrop-blur-md border border-white/10 shadow-xl transition-colors"
             >
               <Settings size={24} />
               <span className="hidden md:block font-medium">Personnaliser</span>
@@ -1635,15 +1635,15 @@ export default function App() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-          <header className="mb-8 flex items-center justify-between">
+        <main className="flex-1 overflow-y-auto">
+          <header className="mb-8 flex items-center justify-between bg-black/30 backdrop-blur-xl border-b border-white/10 p-4 md:p-8 sticky top-0 z-30 shadow-sm">
             <div>
-              <h2 className="text-3xl font-bold text-on-surface">
+              <h2 className="text-3xl font-bold text-white">
                 {activeTab === 'tools' && 'Tableau de bord'}
                 {activeTab === 'classes' && 'Gestion des Classes'}
                 {activeTab === 'ai' && 'Studio Pédagogique IA'}
               </h2>
-              <p className="text-on-surface-variant mt-1 text-sm md:text-base">
+              <p className="text-white-variant mt-1 text-sm md:text-base">
                 {activeTab === 'tools' && 'Gérez votre temps et animez votre classe facilement.'}
                 {activeTab === 'classes' && 'Déposez vos cours, images et gérez vos listes d\'élèves.'}
                 {activeTab === 'ai' && 'Générez des évaluations, des flashcards et simplifiez vos cours grâce à l\'IA.'}
@@ -1651,7 +1651,7 @@ export default function App() {
             </div>
           </header>
 
-          <div className="max-w-7xl mx-auto h-[calc(100%-100px)]">
+          <div className="max-w-7xl mx-auto h-[calc(100%-100px)] px-4 md:px-8">
             {activeTab === 'tools' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
                 <InstructionsWidget />
