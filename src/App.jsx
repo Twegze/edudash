@@ -101,6 +101,7 @@ const hexToHue = (hex) => {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('classes'); 
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   
   // Theme & API State
   const [themeMode, setThemeMode] = useState('auto'); // 'auto', 'light', 'dark'
