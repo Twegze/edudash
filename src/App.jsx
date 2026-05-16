@@ -205,13 +205,13 @@ export default function App() {
     <>
       <style>{materialThemeStyles}</style>
       
-      <div className={`theme-wrapper ${isDark ? 'dark' : ''} min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 dark:from-neutral-900 dark:to-black font-sans flex transition-colors duration-300 text-slate-900 dark:text-white`}>
+      <div className={`theme-wrapper ${isDark ? 'dark' : ''} h-screen overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-neutral-900 dark:to-black font-sans flex transition-colors duration-300 text-slate-900 dark:text-white`}>
         
         {/* Sidebar */}
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} setShowSettingsModal={setShowSettingsModal} />
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} setShowSettingsModal={setShowSettingsModal} isSidebarCollapsed={isSidebarCollapsed} setIsSidebarCollapsed={setIsSidebarCollapsed} />
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 h-full overflow-y-auto">
           <header className="mb-8 flex items-center justify-between bg-white/60 dark:bg-black/30 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-sm p-4 md:p-8 sticky top-0 z-30">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white">

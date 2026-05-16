@@ -32,7 +32,13 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl w-full max-w-sm flex flex-col items-center p-6 relative overflow-hidden animate-in zoom-in-95 duration-300">
+      <div 
+        className="bg-white/95 dark:bg-[#18181b]/95 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl w-full max-w-sm flex flex-col items-center p-6 relative overflow-hidden animate-in zoom-in-95 duration-300"
+        style={{
+          backgroundImage: 'radial-gradient(rgba(128, 128, 128, 0.25) 1px, transparent 1px)',
+          backgroundSize: '14px 14px'
+        }}
+      >
         
         <button onClick={onClose} className="absolute top-6 right-6 text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white transition-colors z-10">
           <X size={20} />
