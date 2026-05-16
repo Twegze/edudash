@@ -130,37 +130,37 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl w-full max-w-sm flex flex-col items-center p-6 relative overflow-hidden animate-in zoom-in-95 duration-300">
+      <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl w-full max-w-sm flex flex-col items-center p-6 relative overflow-hidden animate-in zoom-in-95 duration-300">
         
-        <button onClick={onClose} className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-10">
+        <button onClick={onClose} className="absolute top-6 right-6 text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white transition-colors z-10">
           <X size={20} />
         </button>
 
         {/* Settings Tabs */}
-        <div className="flex w-full bg-white/5 p-1 rounded-2xl mb-6 border border-white/10 mt-4 relative z-0">
-          <button onClick={() => setActiveSettingsTab('theme')} className={`flex-1 p-2 rounded-xl text-sm font-medium transition-all ${activeSettingsTab === 'theme' ? 'bg-white/10 text-white shadow-sm' : 'text-white/60 hover:text-white/80'}`}>Thème</button>
-          <button onClick={() => setActiveSettingsTab('api')} className={`flex-1 p-2 rounded-xl text-sm font-medium transition-all ${activeSettingsTab === 'api' ? 'bg-white/10 text-white shadow-sm' : 'text-white/60 hover:text-white/80'}`}>API & IA</button>
+        <div className="flex w-full bg-white/90 dark:bg-white/5 p-1 rounded-2xl mb-6 border border-slate-300 dark:border-white/10 mt-4 relative z-0">
+          <button onClick={() => setActiveSettingsTab('theme')} className={`flex-1 p-2 rounded-xl text-sm font-medium transition-all ${activeSettingsTab === 'theme' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-white/60 hover:text-slate-700 dark:hover:text-white/80'}`}>Thème</button>
+          <button onClick={() => setActiveSettingsTab('api')} className={`flex-1 p-2 rounded-xl text-sm font-medium transition-all ${activeSettingsTab === 'api' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-white/60 hover:text-slate-700 dark:hover:text-white/80'}`}>API & IA</button>
         </div>
 
         {activeSettingsTab === 'theme' ? (
           <div className="w-full flex flex-col items-center animate-in fade-in slide-in-from-left-4 duration-300">
             {/* Top Toggles (Auto, Light, Dark) */}
-            <div className="flex bg-white/5 p-1 rounded-2xl mb-12 border border-white/10">
+            <div className="flex bg-white/90 dark:bg-white/5 p-1 rounded-2xl mb-12 border border-slate-300 dark:border-white/10">
               <button 
                 onClick={() => setThemeMode('auto')}
-                className={`p-2 rounded-xl transition-all ${themeMode === 'auto' ? 'bg-white/10 text-white shadow-sm' : 'text-white/60 hover:text-white/80'}`}
+                className={`p-2 rounded-xl transition-all ${themeMode === 'auto' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-white/60 hover:text-slate-700 dark:hover:text-white/80'}`}
               >
                 <Sparkles size={18} />
               </button>
               <button 
                 onClick={() => setThemeMode('light')}
-                className={`p-2 rounded-xl transition-all ${themeMode === 'light' ? 'bg-white/10 text-white shadow-sm' : 'text-white/60 hover:text-white/80'}`}
+                className={`p-2 rounded-xl transition-all ${themeMode === 'light' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-white/60 hover:text-slate-700 dark:hover:text-white/80'}`}
               >
                 <Sun size={18} />
               </button>
               <button 
                 onClick={() => setThemeMode('dark')}
-                className={`p-2 rounded-xl transition-all ${themeMode === 'dark' ? 'bg-white/10 text-white shadow-sm' : 'text-white/60 hover:text-white/80'}`}
+                className={`p-2 rounded-xl transition-all ${themeMode === 'dark' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-white/60 hover:text-slate-700 dark:hover:text-white/80'}`}
               >
                 <Moon size={18} />
               </button>
@@ -174,7 +174,7 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
                   <div 
                     key={index} 
                     onClick={() => setActiveIndex(index)}
-                    className={`rounded-full cursor-pointer transition-all duration-300 relative shadow-lg ${isActive ? 'w-20 h-20 border-[6px] border-white/90 z-10' : 'w-8 h-8 border-2 border-white/20 hover:scale-110 z-0'}`}
+                    className={`rounded-full cursor-pointer transition-all duration-300 relative shadow-lg ${isActive ? 'w-20 h-20 border-[6px] border-slate-900 dark:border-white/90 z-10' : 'w-8 h-8 border-2 border-slate-300 dark:border-white/20 hover:scale-110 z-0'}`}
                     style={{ backgroundColor: color }}
                   >
                     {isActive && (
@@ -192,14 +192,14 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
             </div>
 
             {/* Controls (+ / -) */}
-            <div className="flex items-center gap-6 mb-10 text-white/60">
-              <button onClick={handleAddColor} disabled={themeColors.length >= 5} className="hover:text-white transition-colors disabled:opacity-30 disabled:hover:text-white/50 p-2">
+            <div className="flex items-center gap-6 mb-10 text-slate-500 dark:text-white/60">
+              <button onClick={handleAddColor} disabled={themeColors.length >= 5} className="hover:text-slate-900 dark:hover:text-white transition-colors disabled:opacity-30 disabled:hover:text-slate-400 dark:disabled:hover:text-white/50 p-2">
                 <Plus size={24} />
               </button>
-              <button onClick={handleRemoveColor} disabled={themeColors.length <= 1} className="hover:text-white transition-colors disabled:opacity-30 disabled:hover:text-white/50 p-2">
+              <button onClick={handleRemoveColor} disabled={themeColors.length <= 1} className="hover:text-slate-900 dark:hover:text-white transition-colors disabled:opacity-30 disabled:hover:text-slate-400 dark:disabled:hover:text-white/50 p-2">
                 <Minus size={24} />
               </button>
-              <button className="hover:text-white transition-colors p-2 opacity-50 cursor-not-allowed" title="Plus d'options à venir">
+              <button className="hover:text-slate-900 dark:hover:text-white transition-colors p-2 opacity-50 cursor-not-allowed" title="Plus d'options à venir">
                  <div className="w-6 h-6 flex flex-wrap gap-1 justify-center items-center content-center">
                    <div className="w-[5px] h-[5px] rounded-full bg-current"></div>
                    <div className="w-[5px] h-[5px] rounded-full bg-current"></div>
@@ -210,43 +210,43 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
 
             {/* Bottom: Palette */}
             <div className="flex items-center w-full justify-between gap-2 px-2 pb-4">
-              <button className="text-white/30 hover:text-white/70"><ChevronLeft size={16}/></button>
+              <button className="text-slate-400 dark:text-white/30 hover:text-slate-600 dark:hover:text-white/70"><ChevronLeft size={16}/></button>
               <div className="flex gap-3 overflow-x-auto no-scrollbar py-2 px-1">
                 {predefinedPalettes.map(color => (
                   <button 
                     key={color}
                     onClick={() => updateActiveColor(color)}
-                    className="w-6 h-6 shrink-0 rounded-full border border-white/10 shadow-sm hover:scale-125 transition-transform"
+                    className="w-6 h-6 shrink-0 rounded-full border border-slate-300 dark:border-white/10 shadow-sm hover:scale-125 transition-transform"
                     style={{ backgroundColor: color }}
                   />
                 ))}
               </div>
-              <button className="text-white/30 hover:text-white/70"><ChevronRight size={16}/></button>
+              <button className="text-slate-400 dark:text-white/30 hover:text-slate-600 dark:hover:text-white/70"><ChevronRight size={16}/></button>
             </div>
           </div>
         ) : (
           <div className="w-full flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300 mb-4">
             <div className="flex flex-col gap-2">
-               <label className="text-sm font-medium text-white/90 ml-1 flex items-center gap-2"><Key size={16}/> Clé API Gemini</label>
+               <label className="text-sm font-medium text-slate-700 dark:text-white/90 ml-1 flex items-center gap-2"><Key size={16}/> Clé API Gemini</label>
                <input 
                  type="password" 
                  value={customApiKey} 
                  onChange={e => setCustomApiKey(e.target.value)} 
                  placeholder="AIzaSy..." 
-                 className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all" 
+                 className="w-full bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-2xl p-4 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-400 dark:focus:border-white/40 focus:ring-1 focus:ring-slate-300 dark:focus:ring-white/20 transition-all" 
                />
-               <p className="text-[11px] text-white/60 ml-1 mt-1 leading-tight">Laissez vide pour utiliser la clé par défaut de l'environnement (si disponible).</p>
+               <p className="text-[11px] text-slate-500 dark:text-white/60 ml-1 mt-1 leading-tight">Laissez vide pour utiliser la clé par défaut de l'environnement (si disponible).</p>
             </div>
             <div className="flex flex-col gap-2">
-               <label className="text-sm font-medium text-white/90 ml-1 flex items-center gap-2">
+               <label className="text-sm font-medium text-slate-700 dark:text-white/90 ml-1 flex items-center gap-2">
                  <Cpu size={16}/> Modèle IA
-                 {modelsLoading && <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full ml-2 animate-pulse">Chargement...</span>}
+                 {modelsLoading && <span className="text-[10px] bg-slate-200 dark:bg-white/20 px-2 py-0.5 rounded-full ml-2 animate-pulse">Chargement...</span>}
                </label>
                <div className="relative">
                  <select 
                    value={selectedModel} 
                    onChange={e => setSelectedModel(e.target.value)} 
-                   className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 pr-10 text-white text-sm focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/20 transition-all appearance-none cursor-pointer"
+                   className="w-full bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-2xl p-4 pr-10 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-slate-400 dark:focus:border-white/40 focus:ring-1 focus:ring-slate-300 dark:focus:ring-white/20 transition-all appearance-none cursor-pointer"
                  >
                    {availableModels.length > 0 ? (
                      availableModels.map(m => (
@@ -261,9 +261,9 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
                      </>
                    )}
                  </select>
-                 <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none" />
+                 <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-white/60 pointer-events-none" />
                </div>
-               <p className="text-[11px] text-white/60 ml-1 mt-1 leading-tight">
+               <p className="text-[11px] text-slate-500 dark:text-white/60 ml-1 mt-1 leading-tight">
                  {availableModels.length > 0 ? "Liste des modèles synchronisée depuis l'API." : "Choisissez le moteur qui traitera vos documents et requêtes."}
                </p>
             </div>
@@ -291,7 +291,7 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
 
   if (!compact && isImage) {
     return (
-      <div className="relative group overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl">
+      <div className="relative group overflow-hidden bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl">
         <img src={file.dataUrl} alt={file.name} className="w-full max-h-[400px] object-contain bg-black/5" />
         <div className="absolute top-0 left-0 right-0 p-3 bg-gradient-to-b from-black/60 to-transparent flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
           <span className="text-white text-sm font-medium truncate px-2">{file.name}</span>
@@ -307,9 +307,9 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
 
   if (!compact && isPDF) {
     return (
-      <div className="relative group overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl h-[500px] flex flex-col">
-        <div className="p-3 bg-white/5 border-b border-white/10 flex justify-between items-center">
-          <div className="flex items-center gap-2 text-white">
+      <div className="relative group overflow-hidden bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl h-[500px] flex flex-col">
+        <div className="p-3 bg-white/90 dark:bg-white/5 border-b border-slate-200 dark:border-white/10 flex justify-between items-center">
+          <div className="flex items-center gap-2 text-slate-900 dark:text-white">
              <File size={18} className="text-red-500" />
              <span className="font-medium text-sm truncate">{file.name}</span>
           </div>
@@ -325,14 +325,14 @@ const FilePreviewCard = ({ file, onRemove, compact = false }) => {
   }
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl relative group">
+    <div className="flex items-center justify-between p-4 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl relative group">
       <div className="flex items-center gap-3 overflow-hidden">
-        <div className={`p-3 rounded-xl bg-white/5 border border-white/10 ${colorClass}`}>
+        <div className={`p-3 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 ${colorClass}`}>
           <Icon size={24} />
         </div>
         <div className="flex flex-col overflow-hidden">
-          <span className="font-medium text-white truncate">{file.name}</span>
-          <span className="text-xs text-white/60 uppercase tracking-wider">
+          <span className="font-medium text-slate-900 dark:text-white truncate">{file.name}</span>
+          <span className="text-xs text-slate-500 dark:text-white/60 uppercase tracking-wider">
             {isImage ? 'Image' : isPDF ? 'Document PDF' : isWord ? 'Document Word' : isExcel ? 'Classeur Excel' : isPPT ? 'Présentation' : 'Fichier attaché'}
           </span>
         </div>
@@ -359,7 +359,7 @@ const InstructionsWidget = () => {
   ];
 
   return (
-    <div className="md:col-span-2 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-around min-h-[160px] gap-4">
+    <div className="md:col-span-2 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-around min-h-[160px] gap-4">
       {modes.map((mode) => {
         const Icon = mode.icon;
         const isActive = activeMode === mode.id;
@@ -368,13 +368,13 @@ const InstructionsWidget = () => {
           <button 
             key={mode.id}
             onClick={() => setActiveMode(isActive ? null : mode.id)}
-            className={`flex-1 text-center p-4 md:p-6 w-full rounded-2xl transition-all duration-300 border border-transparent ${isActive ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-[1.02] shadow-xl border-white/10' : isDimmed ? 'opacity-40 hover:opacity-70' : 'hover:bg-white/10'}`}
+            className={`flex-1 text-center p-4 md:p-6 w-full rounded-2xl transition-all duration-300 border border-transparent ${isActive ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white scale-[1.02] shadow-xl dark:border-white/10' : isDimmed ? 'opacity-40 hover:opacity-70' : 'hover:bg-slate-200/50 dark:hover:bg-white/10'}`}
           >
-            <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3 transition-colors ${isActive ? 'bg-[var(--md-sys-color-on-primary)] text-[var(--md-sys-color-primary)]' : 'bg-white/5 border border-white/10 text-white'}`}>
+            <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-3 transition-colors ${isActive ? 'bg-[var(--md-sys-color-on-primary)] text-[var(--md-sys-color-primary)]' : 'bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white'}`}>
               <Icon size={32} />
             </div>
-            <span className={`font-bold block ${isActive ? 'text-white' : 'text-white'}`}>{mode.title}</span>
-            <span className={`text-sm mt-1 block ${isActive ? 'text-white/90' : 'text-white/60'}`}>{mode.desc}</span>
+            <span className={`font-bold block ${isActive ? 'text-white' : 'text-slate-900 dark:text-white'}`}>{mode.title}</span>
+            <span className={`text-sm mt-1 block ${isActive ? 'text-white/90' : 'text-slate-500 dark:text-white/60'}`}>{mode.desc}</span>
           </button>
         )
       })}
@@ -419,9 +419,9 @@ const GroupMakerWidget = ({ classes }) => {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex flex-col h-full max-h-[400px]">
+    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex flex-col h-full max-h-[400px]">
       <div className="flex items-center gap-2 mb-4">
-        <Users className="text-white" size={24} />
+        <Users className="text-slate-900 dark:text-white" size={24} />
         <h3 className="font-semibold text-lg flex-1">Générateur de Groupes</h3>
       </div>
       
@@ -429,15 +429,15 @@ const GroupMakerWidget = ({ classes }) => {
         <div className="flex-1 flex flex-col overflow-hidden">
            <div className="flex-1 overflow-y-auto pr-2 grid grid-cols-2 gap-2 mb-4">
               {groups.map((g, i) => (
-                <div key={i} className="bg-white/5 p-3 rounded-xl border border-white/10 text-sm">
-                  <div className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-1 border-b border-white/10 pb-1">Groupe {i+1}</div>
-                  <ul className="text-white">
+                <div key={i} className="bg-white/90 dark:bg-white/5 p-3 rounded-xl border border-slate-300 dark:border-white/10 text-sm">
+                  <div className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-1 border-b border-slate-300 dark:border-white/10 pb-1">Groupe {i+1}</div>
+                  <ul className="text-slate-900 dark:text-white">
                     {g.map((name, j) => <li key={j}>• {name}</li>)}
                   </ul>
                 </div>
               ))}
            </div>
-           <button onClick={() => setIsGenerated(false)} className="w-full py-3 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors font-medium border border-white/10">
+           <button onClick={() => setIsGenerated(false)} className="w-full py-3 bg-white/90 dark:bg-white/5 rounded-full text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-colors font-medium border border-slate-300 dark:border-white/10">
              Modifier / Recommencer
            </button>
         </div>
@@ -446,7 +446,7 @@ const GroupMakerWidget = ({ classes }) => {
             <select 
               value={selectedSource} 
               onChange={handleSourceChange}
-              className="w-full bg-white/5 p-2 rounded-xl text-sm border border-white/10 focus:ring-2 focus:ring-white text-white outline-none"
+              className="w-full bg-white/90 dark:bg-white/5 p-2 rounded-xl text-sm border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-slate-900 dark:text-white outline-none"
             >
               <option value="manual">-- Liste manuelle --</option>
               {classes.map(c => (
@@ -460,15 +460,15 @@ const GroupMakerWidget = ({ classes }) => {
                 setNames(e.target.value);
                 setSelectedSource("manual"); // Repasse en manuel si on édite
               }}
-              className="flex-1 w-full bg-white/5 rounded-2xl p-4 resize-none border border-white/10 focus:ring-2 focus:ring-white text-sm text-white outline-none"
+              className="flex-1 w-full bg-white/90 dark:bg-white/5 rounded-2xl p-4 resize-none border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-sm text-slate-900 dark:text-white outline-none"
               placeholder="Liste des élèves (un par ligne)..."
             />
-            <div className="flex items-center gap-2 bg-white/5 p-2 rounded-2xl border border-white/10">
-              <label className="text-sm text-white/60 ml-2 flex-1">Nb. de groupes :</label>
+            <div className="flex items-center gap-2 bg-white/90 dark:bg-white/5 p-2 rounded-2xl border border-slate-300 dark:border-white/10">
+              <label className="text-sm text-slate-500 dark:text-white/60 ml-2 flex-1">Nb. de groupes :</label>
               <input 
                 type="number" min="2" max="15" 
                 value={numGroups} onChange={(e) => setNumGroups(parseInt(e.target.value)||2)}
-                className="w-16 text-center bg-transparent border-none focus:ring-0 text-white font-bold outline-none"
+                className="w-16 text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-bold outline-none"
               />
             </div>
             <button 
@@ -509,9 +509,9 @@ const TimerWidget = () => {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex flex-col items-center justify-center h-full">
+    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex flex-col items-center justify-center h-full">
       <div className="flex items-center gap-2 mb-4 w-full">
-        <Clock className="text-white" size={24} />
+        <Clock className="text-slate-900 dark:text-white" size={24} />
         <h3 className="font-semibold text-lg">Chronomètre</h3>
       </div>
       <div className="text-6xl font-bold font-mono tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-6">
@@ -521,19 +521,19 @@ const TimerWidget = () => {
         <button onClick={toggle} className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center hover:opacity-90 shadow-md transition-transform active:scale-95">
           {isActive ? <Pause fill="white" size={24} /> : <Play fill="white" size={24} className="ml-1" />}
         </button>
-        <button onClick={reset} className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 shadow-sm transition-transform active:scale-95">
-          <RotateCcw size={24} className="text-white" />
+        <button onClick={reset} className="w-16 h-16 rounded-full bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-white/10 shadow-sm transition-transform active:scale-95">
+          <RotateCcw size={24} className="text-slate-900 dark:text-white" />
         </button>
       </div>
       {!isActive && (
-        <div className="flex items-center gap-2 mt-4 bg-white/5 p-2 rounded-2xl border border-white/10">
+        <div className="flex items-center gap-2 mt-4 bg-white/90 dark:bg-white/5 p-2 rounded-2xl border border-slate-300 dark:border-white/10">
           <input 
             type="number" min="1" max="90" value={inputMinutes} 
             onChange={(e) => setInputMinutes(parseInt(e.target.value) || 1)}
-            className="w-16 text-center bg-transparent border-none focus:ring-0 text-white font-semibold outline-none"
+            className="w-16 text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-semibold outline-none"
           />
-          <span className="text-sm text-white/60">min</span>
-          <button onClick={reset} className="ml-2 text-white p-2 hover:bg-white/10 rounded-xl transition-colors">
+          <span className="text-sm text-slate-500 dark:text-white/60">min</span>
+          <button onClick={reset} className="ml-2 text-slate-900 dark:text-white p-2 hover:bg-slate-200 dark:hover:bg-white/10 rounded-xl transition-colors">
             <CheckCircle2 size={20} />
           </button>
         </div>
@@ -575,22 +575,22 @@ const RandomPickerWidget = ({ classes }) => {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex flex-col h-full">
+    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex flex-col h-full">
       <div className="flex items-center gap-2 mb-4">
-        <Users className="text-white" size={24} />
+        <Users className="text-slate-900 dark:text-white" size={24} />
         <h3 className="font-semibold text-lg flex-1">Tirage au sort</h3>
       </div>
       <div className="flex-1 flex flex-col gap-4">
         {selected ? (
-          <div className="flex-1 bg-white/5 rounded-2xl flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-300">
-            <span className="text-sm text-white/60 mb-2">
+          <div className="flex-1 bg-white/90 dark:bg-white/5 rounded-2xl flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-300">
+            <span className="text-sm text-slate-500 dark:text-white/60 mb-2">
               {isPicking ? "Sélection en cours..." : "L'élève choisi est :"}
             </span>
             <span className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">{selected}</span>
             {!isPicking && (
               <button 
                 onClick={() => setSelected(null)}
-                className="mt-6 text-sm px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors text-white"
+                className="mt-6 text-sm px-4 py-2 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors text-slate-900 dark:text-white"
               >
                 Retour à la liste
               </button>
@@ -601,7 +601,7 @@ const RandomPickerWidget = ({ classes }) => {
             <select 
               value={selectedSource} 
               onChange={handleSourceChange}
-              className="w-full bg-white/5 p-2 rounded-xl text-sm border border-white/10 focus:ring-2 focus:ring-white text-white outline-none"
+              className="w-full bg-white/90 dark:bg-white/5 p-2 rounded-xl text-sm border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-slate-900 dark:text-white outline-none"
             >
               <option value="manual">-- Liste manuelle --</option>
               {classes.map(c => (
@@ -614,7 +614,7 @@ const RandomPickerWidget = ({ classes }) => {
                 setNames(e.target.value);
                 setSelectedSource("manual");
               }}
-              className="flex-1 w-full bg-white/5 rounded-2xl p-4 resize-none border border-white/10 focus:ring-2 focus:ring-white text-sm text-white outline-none"
+              className="flex-1 w-full bg-white/90 dark:bg-white/5 rounded-2xl p-4 resize-none border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-sm text-slate-900 dark:text-white outline-none"
               placeholder="Collez votre liste d'élèves ici (un par ligne)..."
             />
           </>
@@ -703,32 +703,32 @@ const NoiseMeterWidget = () => {
   if (volume > 75) { barColor = "bg-red-500"; statusText = "Trop bruyant !"; }
 
   return (
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex flex-col h-full">
+    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Mic className="text-white" size={24} />
+          <Mic className="text-slate-900 dark:text-white" size={24} />
           <h3 className="font-semibold text-lg">Sonomètre</h3>
         </div>
         <button 
           onClick={isListening ? stopListening : startListening}
           className={`p-3 rounded-full flex items-center justify-center transition-colors shadow-sm ${
-            isListening ? 'bg-[var(--md-sys-color-error-container)] text-[var(--md-sys-color-on-error-container)]' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+            isListening ? 'bg-[var(--md-sys-color-error-container)] text-[var(--md-sys-color-on-error-container)]' : 'bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10'
           }`}
         >
           {isListening ? <VolumeX size={20} /> : <Volume2 size={20} />}
         </button>
       </div>
       <div className="flex-1 flex flex-col items-center justify-center gap-6">
-        <div className="w-full h-8 bg-white/5 rounded-full overflow-hidden border border-white/10">
+        <div className="w-full h-8 bg-white/90 dark:bg-white/5 rounded-full overflow-hidden border border-slate-300 dark:border-white/10">
           <div className={`h-full transition-all duration-100 ease-out ${barColor}`} style={{ width: `${Math.max(5, volume)}%` }} />
         </div>
         <div className="text-center">
           <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 mb-1">{volume} %</div>
-          <div className="text-sm font-medium text-white/60 uppercase tracking-wider">{statusText}</div>
+          <div className="text-sm font-medium text-slate-500 dark:text-white/60 uppercase tracking-wider">{statusText}</div>
         </div>
       </div>
       {!isListening && (
-        <p className="text-xs text-center text-white/60 mt-4 opacity-70">
+        <p className="text-xs text-center text-slate-500 dark:text-white/60 mt-4 opacity-70">
           Cliquez sur l'icône pour activer le microphone.
         </p>
       )}
@@ -836,10 +836,10 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
       
       {/* Sidebar Classes */}
       <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-4">
-        <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-4">
+        <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-4">
           <div className="flex items-center justify-between mb-4 px-2">
-            <h2 className="font-bold text-lg text-white flex items-center gap-2">
-              <Users size={20} className="text-white"/> Mes Classes
+            <h2 className="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+              <Users size={20} className="text-slate-900 dark:text-white"/> Mes Classes
             </h2>
           </div>
           
@@ -851,7 +851,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 className={`flex items-center justify-between px-4 py-3 rounded-2xl transition-all ${
                   selectedClassId === c.id 
                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md font-medium' 
-                    : 'hover:bg-white/5 text-white/60 hover:text-white'
+                    : 'hover:bg-slate-200/50 dark:hover:bg-white/5 text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <span>{c.name}</span>
@@ -865,19 +865,19 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                   type="text" autoFocus
                   value={newClassName} onChange={(e) => setNewClassName(e.target.value)}
                   placeholder="Nom de la classe..."
-                  className="flex-1 bg-white/5 p-2 rounded-xl text-sm border border-white/10 focus:border-white text-white outline-none"
+                  className="flex-1 bg-white/90 dark:bg-white/5 p-2 rounded-xl text-sm border border-slate-300 dark:border-white/10 focus:border-slate-400 dark:focus:border-white text-slate-900 dark:text-white outline-none"
                 />
                 <button type="submit" className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl shadow-sm hover:opacity-90 transition-opacity">
                   <CheckCircle2 size={16} />
                 </button>
-                <button type="button" onClick={() => setIsAddingClass(false)} className="p-2 bg-white/5 text-white/60 rounded-xl hover:bg-white/10 transition-colors">
+                <button type="button" onClick={() => setIsAddingClass(false)} className="p-2 bg-white/90 dark:bg-white/5 text-slate-500 dark:text-white/60 rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
                   <X size={16} />
                 </button>
               </form>
             ) : (
               <button 
                 onClick={() => setIsAddingClass(true)}
-                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-dashed border-white/10 text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border-2 border-dashed border-slate-300 dark:border-white/10 text-slate-500 dark:text-white/60 hover:bg-slate-200/50 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white transition-colors"
               >
                 <Plus size={18} /> Ajouter une classe
               </button>
@@ -891,23 +891,23 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
         {selectedClass ? (
           <>
             {/* Header & SubTabs */}
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-4 flex flex-col gap-4">
+            <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-4 flex flex-col gap-4">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <h2 className="font-bold text-xl text-white">Classe : {selectedClass.name}</h2>
+                  <h2 className="font-bold text-xl text-slate-900 dark:text-white">Classe : {selectedClass.name}</h2>
                 </div>
                 
                 {/* Sub-navigation Tabs */}
-                <div className="flex bg-white/5 p-1 rounded-2xl border border-white/10">
+                <div className="flex bg-white/90 dark:bg-white/5 p-1 rounded-2xl border border-slate-300 dark:border-white/10">
                   <button 
                     onClick={() => setActiveSubTab('feed')}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'feed' ? 'bg-white/10 text-white shadow-md' : 'text-white/60 hover:text-white'}`}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'feed' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-md' : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'}`}
                   >
                     Documents & Cours
                   </button>
                   <button 
                     onClick={() => setActiveSubTab('students')}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'students' ? 'bg-white/10 text-white shadow-md' : 'text-white/60 hover:text-white'}`}
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeSubTab === 'students' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-md' : 'text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white'}`}
                   >
                     Liste des Élèves
                   </button>
@@ -917,24 +917,24 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
             {/* Content Switch based on SubTab */}
             {activeSubTab === 'students' ? (
-              <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex-1 flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200">
+              <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex-1 flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-lg text-white flex items-center gap-2">
+                  <h3 className="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
                     <Users size={20} /> Gestion des élèves
                   </h3>
-                  <span className="text-sm font-medium bg-white/5 text-white px-3 py-1 rounded-full border border-white/10">
+                  <span className="text-sm font-medium bg-white/90 dark:bg-white/5 text-slate-900 dark:text-white px-3 py-1 rounded-full border border-slate-300 dark:border-white/10">
                     {localStudentsText.split('\n').filter(n => n.trim()).length} élèves
                   </span>
                 </div>
                 
-                <p className="text-sm text-white/60">
+                <p className="text-sm text-slate-500 dark:text-white/60">
                   Copiez-collez votre liste d'élèves ici. Saisissez <strong>un élève par ligne</strong>. Cette liste sera automatiquement proposée dans les outils "Tirage au sort" et "Générateur de groupes".
                 </p>
                 
                 <textarea
                   value={localStudentsText}
                   onChange={(e) => setLocalStudentsText(e.target.value)}
-                  className="flex-1 w-full bg-white/5 rounded-2xl p-4 resize-none border border-white/10 focus:ring-2 focus:ring-white text-white outline-none min-h-[300px]"
+                  className="flex-1 w-full bg-white/90 dark:bg-white/5 rounded-2xl p-4 resize-none border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-slate-900 dark:text-white outline-none min-h-[300px]"
                   placeholder="Ex:\nJean Dupont\nMarie Curie\nAlbert Einstein..."
                 />
 
@@ -956,16 +956,16 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
               /* SubTab : Feed (Cours & Documents) */
               <>
                 <div className="flex justify-end gap-2">
-                  <div className="flex items-center gap-3 bg-white/5 p-2 rounded-2xl border border-white/10">
-                    <Calendar size={18} className="text-white/60 ml-2" />
+                  <div className="flex items-center gap-3 bg-white/90 dark:bg-white/5 p-2 rounded-2xl border border-slate-300 dark:border-white/10">
+                    <Calendar size={18} className="text-slate-500 dark:text-white/60 ml-2" />
                     <input 
                       type="date" 
                       value={filterDate} 
                       onChange={(e) => setFilterDate(e.target.value)}
-                      className="bg-transparent border-none focus:ring-0 text-sm text-white cursor-pointer outline-none"
+                      className="bg-transparent border-none focus:ring-0 text-sm text-slate-900 dark:text-white cursor-pointer outline-none"
                     />
                     {filterDate && (
-                      <button onClick={() => setFilterDate("")} className="mr-2 text-white/60 hover:text-red-500 transition-colors">
+                      <button onClick={() => setFilterDate("")} className="mr-2 text-slate-500 dark:text-white/60 hover:text-red-500 transition-colors">
                         <X size={16} />
                       </button>
                     )}
@@ -973,8 +973,8 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 </div>
 
                 {isAddingCourse ? (
-                  <form onSubmit={handleAddCourse} className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 animate-in slide-in-from-top-4 fade-in">
-                    <h3 className="font-bold text-white mb-4 flex items-center gap-2">
+                  <form onSubmit={handleAddCourse} className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 animate-in slide-in-from-top-4 fade-in">
+                    <h3 className="font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                       <FileText size={20} /> Déposer un nouveau document
                     </h3>
                     <div className="flex flex-col gap-4">
@@ -982,22 +982,22 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                         <input 
                           type="text" placeholder="Titre du cours..." required
                           value={newCourse.title} onChange={(e) => setNewCourse({...newCourse, title: e.target.value})}
-                          className="flex-1 bg-white/5 p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-white outline-none"
+                          className="flex-1 bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none"
                         />
                         <input 
                           type="date" required
                           value={newCourse.date} onChange={(e) => setNewCourse({...newCourse, date: e.target.value})}
-                          className="bg-white/5 p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-white outline-none"
+                          className="bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none"
                         />
                       </div>
                       
                       <textarea 
                         placeholder="Contenu du cours ou résumé (optionnel si fichier joint)..." rows="3"
                         value={newCourse.content} onChange={(e) => setNewCourse({...newCourse, content: e.target.value})}
-                        className="w-full bg-white/5 p-3 rounded-2xl border border-white/10 text-white focus:ring-2 focus:ring-white outline-none resize-none"
+                        className="w-full bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none resize-none"
                       />
 
-                      <div className="border-2 border-dashed border-white/10 rounded-2xl p-4 bg-white/5 text-center relative overflow-hidden transition-colors hover:bg-white/10 hover:border-white/30">
+                      <div className="border-2 border-dashed border-slate-300 dark:border-white/10 rounded-2xl p-4 bg-white/90 dark:bg-white/5 text-center relative overflow-hidden transition-colors hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-400 dark:hover:border-white/30">
                         <input 
                           type="file" 
                           ref={fileInputRef}
@@ -1006,7 +1006,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                           accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                         />
                         {!newCourse.file ? (
-                          <div className="flex flex-col items-center justify-center pointer-events-none text-white/60 py-4">
+                          <div className="flex flex-col items-center justify-center pointer-events-none text-slate-500 dark:text-white/60 py-4">
                             <UploadCloud size={32} className="mb-2 opacity-70" />
                             <span className="font-medium text-sm">Cliquez ou glissez pour joindre un document</span>
                             <span className="text-xs opacity-70 mt-1">Images, PDF, Word, Excel, PowerPoint...</span>
@@ -1019,7 +1019,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                       </div>
 
                       <div className="flex justify-end gap-2 mt-2">
-                        <button type="button" onClick={() => setIsAddingCourse(false)} className="px-4 py-2 rounded-full font-medium text-white/60 hover:bg-white/5 transition-colors">
+                        <button type="button" onClick={() => setIsAddingCourse(false)} className="px-4 py-2 rounded-full font-medium text-slate-500 dark:text-white/60 hover:bg-slate-200 dark:hover:bg-white/5 transition-colors">
                           Annuler
                         </button>
                         <button type="submit" disabled={!newCourse.title.trim()} className="px-6 py-2 rounded-full font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-all">
@@ -1031,13 +1031,13 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                 ) : (
                   <button 
                     onClick={() => setIsAddingCourse(true)}
-                    className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-4 text-white/60 hover:text-white transition-all flex items-center justify-center gap-2 group font-medium relative overflow-hidden"
+                    className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-4 text-slate-500 dark:text-white/60 hover:text-slate-900 dark:hover:text-white transition-all flex items-center justify-center gap-2 group font-medium relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                    <div className="w-8 h-8 rounded-full bg-white/5 text-white flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white transition-colors relative z-10">
+                    <div className="w-8 h-8 rounded-full bg-white/90 dark:bg-white/5 text-slate-900 dark:text-white flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white transition-colors relative z-10">
                       <Plus size={20} />
                     </div>
-                    <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-purple-200">
+                    <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400">
                       Déposer un nouveau cours ou document
                     </span>
                   </button>
@@ -1045,26 +1045,26 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
                 <div className="flex-1 overflow-y-auto pr-2 flex flex-col gap-4 pb-10">
                   {filteredCourses.length === 0 ? (
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-white/60 border border-dashed border-white/10 h-full">
+                    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-slate-500 dark:text-white/60 border-2 border-dashed border-slate-300 dark:border-white/10 h-full">
                       <Search size={48} className="mb-4 opacity-50" />
                       <p className="text-lg font-medium">Aucun cours trouvé.</p>
                       <p className="text-sm mt-1">{filterDate ? "Essayez une autre date." : "Commencez par déposer un premier document pour cette classe."}</p>
                     </div>
                   ) : (
                     filteredCourses.map(course => (
-                      <div key={course.id} className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4">
+                      <div key={course.id} className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4">
                         <div className="flex justify-between items-start">
                           <h3 className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 flex items-center gap-2">
-                            {course.file ? <Paperclip size={18} className="opacity-50 text-white" /> : <BookOpen size={18} className="opacity-50 text-white" />}
+                            {course.file ? <Paperclip size={18} className="opacity-50 text-slate-900 dark:text-white" /> : <BookOpen size={18} className="opacity-50 text-slate-900 dark:text-white" />}
                             {course.title}
                           </h3>
-                          <span className="text-xs font-medium px-3 py-1 bg-white/5 border border-white/10 text-white rounded-full flex items-center gap-1">
+                          <span className="text-xs font-medium px-3 py-1 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white rounded-full flex items-center gap-1">
                             <Calendar size={12} /> {new Date(course.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
                           </span>
                         </div>
 
                         {course.content && (
-                          <div className="text-white bg-white/5 p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-white/10">
+                          <div className="text-slate-900 dark:text-white bg-white/90 dark:bg-white/5 p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-slate-300 dark:border-white/10">
                             {course.content}
                           </div>
                         )}
@@ -1075,7 +1075,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
                         <button 
                           onClick={() => deleteCourse(course.id)}
-                          className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/5 border border-white/10"
+                          className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10"
                           title="Supprimer ce cours"
                         >
                           <Trash2 size={16} />
@@ -1088,9 +1088,9 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
             )}
           </>
         ) : (
-          <div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-white/60 h-full">
-            <Users size={64} className="mb-4 text-white/30" />
-            <p className="text-xl font-bold text-white mb-2">Aucune classe sélectionnée</p>
+          <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-10 text-center flex flex-col items-center justify-center text-slate-500 dark:text-white/60 h-full">
+            <Users size={64} className="mb-4 text-slate-400 dark:text-white/30" />
+            <p className="text-xl font-bold text-slate-900 dark:text-white mb-2">Aucune classe sélectionnée</p>
             <p className="text-md opacity-80">Sélectionnez une classe à gauche ou créez-en une nouvelle pour commencer.</p>
           </div>
         )}
@@ -1280,17 +1280,17 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
     let html = [];
     lines.forEach((line, idx) => {
       if (line.startsWith('### ')) { html.push(<h3 key={idx} className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-bold mt-4 mb-2">{line.substring(4).replace(/\*\*/g, '')}</h3>); }
-      else if (line.startsWith('## ')) { html.push(<h2 key={idx} className="font-bold mt-4 mb-2">{line.substring(3).replace(/\*\*/g, '')}</h2>); }
-      else if (line.startsWith('# ')) { html.push(<h1 key={idx} className="font-bold mt-4 mb-2 text-xl">{line.substring(2).replace(/\*\*/g, '')}</h1>); }
+      else if (line.startsWith('## ')) { html.push(<h2 key={idx} className="font-bold mt-4 mb-2 text-slate-900 dark:text-white">{line.substring(3).replace(/\*\*/g, '')}</h2>); }
+      else if (line.startsWith('# ')) { html.push(<h1 key={idx} className="font-bold mt-4 mb-2 text-xl text-slate-900 dark:text-white">{line.substring(2).replace(/\*\*/g, '')}</h1>); }
       else if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-        html.push(<li key={idx} dangerouslySetInnerHTML={{__html: parseInline(line.substring(2))}} className="ml-4 mb-2 text-white" />);
+        html.push(<li key={idx} dangerouslySetInnerHTML={{__html: parseInline(line.substring(2))}} className="ml-4 mb-2 text-slate-900 dark:text-white" />);
       }
-      else if (line.startsWith('---')) { html.push(<hr key={idx} className="my-6 border-white/10" />); }
+      else if (line.startsWith('---')) { html.push(<hr key={idx} className="my-6 border-slate-200 dark:border-white/10" />); }
       else if (line.startsWith('**') && line.endsWith('**')) {
-        html.push(<p key={idx} className="font-bold mt-4 text-white">{line.replace(/\*\*/g, '')}</p>);
+        html.push(<p key={idx} className="font-bold mt-4 text-slate-900 dark:text-white">{line.replace(/\*\*/g, '')}</p>);
       }
       else if (line.trim() !== "") {
-        html.push(<p key={idx} dangerouslySetInnerHTML={{__html: parseInline(line)}} className="mb-2 text-white" />);
+        html.push(<p key={idx} dangerouslySetInnerHTML={{__html: parseInline(line)}} className="mb-2 text-slate-900 dark:text-white" />);
       }
     });
     return <div className="prose max-w-none">{html}</div>;
@@ -1300,25 +1300,25 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full min-h-[600px]">
-      <div className="col-span-1 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-6 flex flex-col h-fit">
+      <div className="col-span-1 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 flex flex-col h-fit">
         <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="text-white" size={24} />
-          <h2 className="font-bold text-xl text-white">Studio IA ✨</h2>
+          <Sparkles className="text-slate-900 dark:text-white" size={24} />
+          <h2 className="font-bold text-xl text-slate-900 dark:text-white">Studio IA ✨</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-5">
           
           {/* SÉLECTION DE L'OUTIL IA */}
           <div className="space-y-3">
-            <label className="text-sm font-medium text-white/60 flex items-center gap-2">
+            <label className="text-sm font-medium text-slate-500 dark:text-white/60 flex items-center gap-2">
               <Layers size={16} /> Outil Pédagogique
             </label>
             <div className="grid grid-cols-1 gap-2">
               <button 
                 type="button" onClick={() => setSelectedTool("quiz")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "quiz" ? "border-white/40 bg-white/10 text-white shadow-sm" : "border-white/10 bg-white/5 text-white/60 hover:bg-white/10"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "quiz" ? "border-slate-400 dark:border-white/40 bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/5 text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/10"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "quiz" ? "bg-white/20 text-white" : "bg-white/5"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "quiz" ? "bg-slate-300 dark:bg-white/20 text-slate-900 dark:text-white" : "bg-slate-100 dark:bg-white/5"}`}>
                   <ListChecks size={18} />
                 </div>
                 <div>
@@ -1329,9 +1329,9 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
               <button 
                 type="button" onClick={() => setSelectedTool("flashcards")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "flashcards" ? "border-white/40 bg-white/10 text-white shadow-sm" : "border-white/10 bg-white/5 text-white/60 hover:bg-white/10"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "flashcards" ? "border-slate-400 dark:border-white/40 bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/5 text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/10"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "flashcards" ? "bg-white/20 text-white" : "bg-white/5"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "flashcards" ? "bg-slate-300 dark:bg-white/20 text-slate-900 dark:text-white" : "bg-slate-100 dark:bg-white/5"}`}>
                   <BookOpen size={18} />
                 </div>
                 <div>
@@ -1342,9 +1342,9 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
               <button 
                 type="button" onClick={() => setSelectedTool("simplify")}
-                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "simplify" ? "border-white/40 bg-white/10 text-white shadow-sm" : "border-white/10 bg-white/5 text-white/60 hover:bg-white/10"}`}
+                className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all ${selectedTool === "simplify" ? "border-slate-400 dark:border-white/40 bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm" : "border-slate-200 dark:border-white/10 bg-white/90 dark:bg-white/5 text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/10"}`}
               >
-                <div className={`p-2 rounded-full ${selectedTool === "simplify" ? "bg-white/20 text-white" : "bg-white/5"}`}>
+                <div className={`p-2 rounded-full ${selectedTool === "simplify" ? "bg-slate-300 dark:bg-white/20 text-slate-900 dark:text-white" : "bg-slate-100 dark:bg-white/5"}`}>
                   <Lightbulb size={18} />
                 </div>
                 <div>
@@ -1356,13 +1356,13 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
           </div>
 
           <div className="space-y-2 mt-2">
-            <label className="text-sm font-medium text-white/60 flex items-center gap-2">
+            <label className="text-sm font-medium text-slate-500 dark:text-white/60 flex items-center gap-2">
               <FileText size={16} /> Source du document
             </label>
             <div className="relative">
               <select 
                 value={sourceType} onChange={(e) => setSourceType(e.target.value)}
-                className="w-full bg-white/5 p-3 pr-10 rounded-2xl border border-white/10 focus:ring-2 focus:ring-white text-white appearance-none outline-none"
+                className="w-full bg-white/90 dark:bg-white/5 p-3 pr-10 rounded-2xl border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-slate-900 dark:text-white appearance-none outline-none"
               >
                 <option value="new">-- Coller un nouveau texte --</option>
                 {classes.map(c => {
@@ -1379,7 +1379,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
                   )
                 })}
               </select>
-              <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none" />
+              <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-white/60 pointer-events-none" />
             </div>
           </div>
 
@@ -1387,7 +1387,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
             <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
               <textarea 
                 value={newText} onChange={(e) => setNewText(e.target.value)} rows="4"
-                className="w-full bg-white/5 p-3 rounded-2xl border border-white/10 focus:ring-2 focus:ring-white text-white resize-none outline-none"
+                className="w-full bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 focus:ring-2 focus:ring-slate-400 dark:focus:ring-white text-slate-900 dark:text-white resize-none outline-none"
                 placeholder="Collez ici le cours ou le texte sur lequel l'IA doit se baser..."
               />
             </div>
@@ -1395,7 +1395,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
           {(selectedTool === "quiz" || selectedTool === "flashcards") && (
             <div className="space-y-2 mb-2 animate-in fade-in">
-              <label className="text-sm font-medium text-white/60 flex items-center justify-between">
+              <label className="text-sm font-medium text-slate-500 dark:text-white/60 flex items-center justify-between">
                 <span className="flex items-center gap-2">
                   <ListChecks size={16} /> Quantité générée
                 </span>
@@ -1404,7 +1404,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
               <input 
                 type="range" min="3" max="15" step="1"
                 value={numItems} onChange={(e) => setNumItems(e.target.value)}
-                className="w-full accent-white"
+                className="w-full accent-slate-900 dark:accent-white"
               />
             </div>
           )}
@@ -1425,24 +1425,24 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
         </form>
       </div>
 
-      <div className="col-span-1 lg:col-span-2 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-8 overflow-y-auto relative h-[600px] lg:h-auto">
+      <div className="col-span-1 lg:col-span-2 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-8 overflow-y-auto relative h-[600px] lg:h-auto">
         {!result && !loading && !error && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white/60 p-6 text-center">
-            <Sparkles size={64} className="mb-4 opacity-50 text-white" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500 dark:text-white/60 p-6 text-center">
+            <Sparkles size={64} className="mb-4 opacity-50 text-slate-900 dark:text-white" />
             <p className="text-lg font-medium">Sélectionnez un outil, une source et lancez la génération.</p>
             <p className="text-sm mt-2">Le matériel pédagogique généré s'affichera ici.</p>
           </div>
         )}
 
         {infoMessage && !loading && (
-          <div className="bg-blue-50/10 text-blue-300 p-4 rounded-2xl mb-4 border border-blue-500/30 flex items-start gap-3 text-sm">
+          <div className="bg-blue-50 dark:bg-blue-50/10 text-blue-700 dark:text-blue-300 p-4 rounded-2xl mb-4 border border-blue-200 dark:border-blue-500/30 flex items-start gap-3 text-sm">
             <AlertCircle size={18} className="mt-0.5 shrink-0" />
             <p>{infoMessage}</p>
           </div>
         )}
 
         {error && (
-          <div className="bg-red-500/10 text-red-300 p-4 rounded-2xl mb-4 border border-red-500/30 text-sm font-medium">
+          <div className="bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 p-4 rounded-2xl mb-4 border border-red-200 dark:border-red-500/30 text-sm font-medium">
             {error}
           </div>
         )}
@@ -1566,10 +1566,10 @@ export default function App() {
     <>
       <style>{materialThemeStyles}</style>
       
-      <div className={`theme-wrapper dark min-h-screen bg-gradient-to-br from-neutral-900 to-black font-sans flex transition-colors duration-300 text-white`}>
+      <div className={`theme-wrapper ${isDark ? 'dark' : ''} min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 dark:from-neutral-900 dark:to-black font-sans flex transition-colors duration-300 text-slate-900 dark:text-white`}>
         
         {/* Sidebar */}
-        <aside className="w-20 md:w-64 bg-white/10 backdrop-blur-xl border-r border-white/20 shadow-2xl flex flex-col p-4 z-20 transition-all duration-300">
+        <aside className="w-20 md:w-64 bg-white/60 dark:bg-black/30 backdrop-blur-xl border-r border-slate-200 dark:border-white/10 shadow-xl flex flex-col p-4 z-20 transition-all duration-300">
           <div className="flex items-center justify-center md:justify-start gap-3 p-2 mb-8 mt-4">
             <div className="w-10 h-10 min-w-[40px] rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center shadow-lg">
               <GraduationCap size={24} className="text-white" />
@@ -1581,33 +1581,33 @@ export default function App() {
             <button 
               onClick={() => setActiveTab('classes')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'classes' ? 'bg-white/10 text-white font-bold shadow-sm' : 'text-white/60 hover:bg-white/5 hover:text-white'
+                activeTab === 'classes' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="Mes Classes"
             >
-              <Users size={24} className={activeTab === 'classes' ? "text-white" : ""} />
+              <Users size={24} className={activeTab === 'classes' ? "text-slate-900 dark:text-white" : ""} />
               <span className="hidden md:block">Mes Classes</span>
             </button>
 
             <button 
               onClick={() => setActiveTab('tools')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'tools' ? 'bg-white/10 text-white font-bold shadow-sm' : 'text-white/60 hover:bg-white/5 hover:text-white'
+                activeTab === 'tools' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="Outils"
             >
-              <Home size={24} className={activeTab === 'tools' ? "text-white" : ""} />
+              <Home size={24} className={activeTab === 'tools' ? "text-slate-900 dark:text-white" : ""} />
               <span className="hidden md:block">Outils</span>
             </button>
             
             <button 
               onClick={() => setActiveTab('ai')}
               className={`flex items-center justify-center md:justify-start gap-4 p-4 rounded-full transition-all duration-200 ${
-                activeTab === 'ai' ? 'bg-white/10 text-white font-bold shadow-sm' : 'text-white/60 hover:bg-white/5 hover:text-white'
+                activeTab === 'ai' ? 'bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white font-bold shadow-sm' : 'text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="Studio IA"
             >
-              <Sparkles size={24} className={activeTab === 'ai' ? "text-white" : ""} />
+              <Sparkles size={24} className={activeTab === 'ai' ? "text-slate-900 dark:text-white" : ""} />
               <span className="hidden md:block">Studio IA ✨</span>
             </button>
           </nav>
@@ -1615,7 +1615,7 @@ export default function App() {
           <div className="mt-auto">
             <button 
               onClick={() => setShowSettingsModal(true)}
-              className="flex items-center justify-center md:justify-start gap-4 p-4 rounded-full w-full text-white/60 hover:bg-white/5 transition-colors"
+              className="flex items-center justify-center md:justify-start gap-4 p-4 rounded-full w-full text-slate-500 dark:text-white/60 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
             >
               <Settings size={24} />
               <span className="hidden md:block font-medium">Personnaliser</span>
@@ -1625,14 +1625,14 @@ export default function App() {
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto">
-          <header className="mb-8 flex items-center justify-between bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl p-4 md:p-8 sticky top-0 z-30">
+          <header className="mb-8 flex items-center justify-between bg-white/60 dark:bg-black/30 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-sm p-4 md:p-8 sticky top-0 z-30">
             <div>
-              <h2 className="text-3xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
                 {activeTab === 'tools' && 'Tableau de bord'}
                 {activeTab === 'classes' && 'Gestion des Classes'}
                 {activeTab === 'ai' && 'Studio Pédagogique IA'}
               </h2>
-              <p className="text-white/60 mt-1 text-sm md:text-base">
+              <p className="text-slate-500 dark:text-white/60 mt-1 text-sm md:text-base">
                 {activeTab === 'tools' && 'Gérez votre temps et animez votre classe facilement.'}
                 {activeTab === 'classes' && 'Déposez vos cours, images et gérez vos listes d\'élèves.'}
                 {activeTab === 'ai' && 'Générez des évaluations, des flashcards et simplifiez vos cours grâce à l\'IA.'}
