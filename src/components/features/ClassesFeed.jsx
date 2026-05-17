@@ -150,7 +150,7 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
       </div>
 
       {/* Main Area */}
-      <div className="flex-1 flex flex-col gap-4">
+      <div className="flex-1 h-full flex flex-col gap-4 overflow-hidden">
         {selectedClass ? (
           <>
             {/* Header & SubTabs */}

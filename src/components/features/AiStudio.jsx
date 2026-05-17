@@ -1,20 +1,213 @@
 import React, { useState } from 'react';
 import { Sparkles, Layers, ListChecks, BookOpen, Lightbulb, FileText, ChevronDown, AlertCircle } from 'lucide-react';
 
+const VirtualQuiz = ({ data }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+
+  if (!data || !Array.isArray(data) || data.length === 0) return <div className="text-red-500">Format de données invalide</div>;
+
+  const currentQ = data[currentIndex];
+
+  const handleSelect = (idx) => {
+    if (selectedOption !== null) return;
+    setSelectedOption(idx);
+    if (idx === currentQ.correctIndex) {
+      setScore(score + 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentIndex < data.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setSelectedOption(null);
+    } else {
+      setShowResult(true);
+    }
+  };
+
+  const handleReset = () => {
+    setCurrentIndex(0);
+    setSelectedOption(null);
+    setScore(0);
+    setShowResult(false);
+  };
+
+  if (showResult) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full gap-6 animate-in fade-in zoom-in-95">
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Score Final</h2>
+        <div className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+          {score} / {data.length}
+        </div>
+        <p className="text-lg text-slate-600 dark:text-slate-300 font-medium">
+          {score === data.length ? "Parfait ! Excellent travail ! 🏆" : "Bien joué ! Continuez de vous entraîner. 💪"}
+        </p>
+        <button onClick={handleReset} className="mt-4 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-bold hover:opacity-90 shadow-lg hover:shadow-xl transition-all active:scale-95">
+          Recommencer le quiz
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col h-full gap-6 max-w-2xl mx-auto w-full animate-in fade-in">
+      <div className="flex justify-between items-center text-sm font-medium text-slate-500 dark:text-slate-400">
+        <span>Question {currentIndex + 1} sur {data.length}</span>
+        <span className="bg-slate-200 dark:bg-white/10 px-3 py-1 rounded-full text-slate-700 dark:text-slate-200">Score: {score}</span>
+      </div>
+      
+      <div className="bg-white/90 dark:bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 shadow-xl">
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-8 leading-tight">
+          {currentQ.question}
+        </h3>
+        
+        <div className="grid grid-cols-1 gap-3">
+          {currentQ.options.map((opt, idx) => {
+            let btnClass = "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-900 dark:text-white";
+            
+            if (selectedOption !== null) {
+              if (idx === currentQ.correctIndex) {
+                btnClass = "bg-green-100 dark:bg-green-500/20 border-green-400 dark:border-green-400/50 text-green-900 dark:text-green-100 shadow-md ring-2 ring-green-400";
+              } else if (idx === selectedOption) {
+                btnClass = "bg-red-100 dark:bg-red-500/20 border-red-400 dark:border-red-400/50 text-red-900 dark:text-red-100 shadow-md ring-2 ring-red-400";
+              } else {
+                btnClass = "bg-slate-50 dark:bg-white/5 border-slate-100 dark:border-white/5 text-slate-400 dark:text-slate-500 opacity-50";
+              }
+            }
+
+            return (
+              <button
+                key={idx}
+                disabled={selectedOption !== null}
+                onClick={() => handleSelect(idx)}
+                className={`p-4 rounded-2xl border-2 text-left font-medium transition-all duration-300 ${btnClass}`}
+              >
+                {opt}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {selectedOption !== null && (
+        <div className="animate-in slide-in-from-bottom-4 flex flex-col gap-4">
+          <div className="bg-blue-50 dark:bg-blue-500/10 p-5 rounded-2xl border border-blue-200 dark:border-blue-500/30">
+            <h4 className="font-bold text-blue-900 dark:text-blue-200 mb-2 flex items-center gap-2">
+              <Lightbulb size={18} /> Explication :
+            </h4>
+            <p className="text-blue-800 dark:text-blue-100 text-sm leading-relaxed">{currentQ.explanation}</p>
+          </div>
+          <button 
+            onClick={handleNext}
+            className="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:opacity-90 shadow-lg hover:shadow-xl transition-all active:scale-95"
+          >
+            {currentIndex < data.length - 1 ? "Question suivante" : "Voir le score final"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Flashcard = ({ front, back }) => {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div 
+      className="w-full h-56 cursor-pointer relative"
+      style={{ perspective: "1000px" }}
+      onClick={() => setFlipped(!flipped)}
+    >
+      <div 
+        className="w-full h-full transition-transform duration-500 relative"
+        style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+      >
+        {/* Front */}
+        <div 
+          className="absolute inset-0 bg-white/90 dark:bg-white/10 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-white/10 shadow-lg flex flex-col items-center justify-center p-6 text-center hover:shadow-xl transition-shadow"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-500 flex items-center justify-center mb-4">
+            <BookOpen size={24} />
+          </div>
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">{front}</h3>
+          <span className="absolute bottom-4 text-xs text-slate-400 dark:text-slate-500 font-medium tracking-wide uppercase">Cliquez pour retourner</span>
+        </div>
+        {/* Back */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/40 dark:to-pink-900/40 backdrop-blur-md rounded-3xl border border-purple-200 dark:border-purple-500/30 shadow-lg flex items-center justify-center p-6 text-center"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <p className="text-base font-medium text-slate-900 dark:text-white leading-relaxed">{back}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FlashcardGrid = ({ data }) => {
+  if (!data || !Array.isArray(data) || data.length === 0) return <div className="text-red-500">Format de données invalide</div>;
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 content-start animate-in fade-in">
+      {data.map((card, idx) => (
+        <Flashcard key={idx} front={card.front} back={card.back} />
+      ))}
+    </div>
+  );
+};
+
+const SummaryInteractive = ({ data }) => {
+  if (!data || !data.summary || !data.analogy) return <div className="text-red-500">Format de données invalide</div>;
+  
+  return (
+    <div className="flex flex-col gap-6 max-w-3xl mx-auto w-full animate-in fade-in slide-in-from-bottom-4">
+      <div className="bg-white/90 dark:bg-white/10 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-slate-200 dark:border-white/10 shadow-xl">
+        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+          <div className="p-2 bg-purple-100 dark:bg-purple-500/20 rounded-xl">
+            <ListChecks size={24} className="text-purple-500" />
+          </div>
+          Résumé Express
+        </h3>
+        <ul className="space-y-4">
+          {data.summary.map((point, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-white/5 p-4 rounded-2xl border border-slate-100 dark:border-white/5">
+              <span className="w-2.5 h-2.5 mt-1.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shrink-0 shadow-sm" />
+              <span className="leading-relaxed font-medium">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-500/10 dark:to-pink-500/10 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-purple-200 dark:border-purple-500/20 shadow-xl relative overflow-hidden group">
+        <div className="absolute -top-10 -right-10 p-6 opacity-5 dark:opacity-10 pointer-events-none transform group-hover:scale-110 group-hover:rotate-12 transition-transform duration-700">
+           <Lightbulb size={200} />
+        </div>
+        <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 mb-4 flex items-center gap-2">
+          <Sparkles size={20} className="text-purple-500" /> L'analogie (Niveau 10 ans)
+        </h3>
+        <p className="text-lg text-slate-800 dark:text-slate-100 leading-relaxed font-medium relative z-10 italic">
+          "{data.analogy}"
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
-  const runtimeApiKey = ""; // API Key provided by runtime
+  const runtimeApiKey = ""; 
   const finalApiKey = customApiKey || runtimeApiKey;
   
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState("");
+  const [interactiveData, setInteractiveData] = useState(null);
   const [error, setError] = useState("");
   const [infoMessage, setInfoMessage] = useState("");
   
   const [sourceType, setSourceType] = useState("new"); 
   const [newText, setNewText] = useState("");
   
-  // Nouveaux états pour le Studio IA
-  const [selectedTool, setSelectedTool] = useState("quiz"); // 'quiz', 'flashcards', 'simplify'
+  const [selectedTool, setSelectedTool] = useState("quiz"); 
   const [numItems, setNumItems] = useState(5);
 
   const generateWithRetry = async (prompt, inlineData = null, retries = 5, delay = 1000) => {
@@ -33,7 +226,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
           body: JSON.stringify({
             contents: [{ parts: parts }],
             systemInstruction: { 
-              parts: [{ text: "Tu es un expert en pédagogie et didactique. Tu conçois du matériel d'apprentissage structuré, stimulant et adapté pour des élèves, à partir des documents et images fournis." }]
+              parts: [{ text: "Tu es un expert en pédagogie et didactique. Tu conçois du matériel d'apprentissage structuré, stimulant et adapté pour des élèves, à partir des documents et images fournis. Réponds TOUJOURS avec du JSON pur, sans markdown, sans blabla." }]
             }
           })
         });
@@ -87,11 +280,10 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
     
     setLoading(true);
     setError("");
-    setResult("");
+    setInteractiveData(null);
 
     let prompt = "";
 
-    // Construction du prompt en fonction de l'outil sélectionné
     if (selectedTool === "quiz") {
       prompt = `Génère un quiz à choix multiples (QCM) de ${numItems} questions à partir du document/cours et/ou de l'image fourni en pièce jointe.
       
@@ -102,22 +294,17 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
       
       Consignes : 
       - Si une image ou un PDF est joint, base-toi en priorité sur son contenu visuel.
-      - Format de sortie STRICTEMENT en Markdown.
+      - Format de sortie STRICTEMENT en JSON brut, SANS aucune balise Markdown (pas de \`\`\`json) ni texte supplémentaire.
       
       Format attendu :
-      ### 📝 Quiz de révision
-
-      **Question 1 : [Texte de la question]**
-      - A) [Option 1]
-      - B) [Option 2]
-      - C) [Option 3]
-      - D) [Option 4]
-
-      (Continuer pour toutes les questions)
-
-      ---
-      ### ✅ Corrections et Explications
-      **1. Réponse [A/B/C/D]** : [Courte explication du pourquoi]
+      [
+        {
+          "question": "Texte de la question",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "correctIndex": 0,
+          "explanation": "Courte explication du pourquoi"
+        }
+      ]
       `;
     } else if (selectedTool === "flashcards") {
       prompt = `Génère ${numItems} cartes mémoire (flashcards) pour aider les élèves à réviser les concepts clés du document et/ou de l'image fourni en pièce jointe.
@@ -129,16 +316,15 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
       
       Consignes : 
       - Sélectionne les termes de vocabulaire, dates, ou concepts les plus importants.
-      - Format de sortie STRICTEMENT en Markdown.
+      - Format de sortie STRICTEMENT en JSON brut, SANS aucune balise Markdown (pas de \`\`\`json) ni texte supplémentaire.
       
       Format attendu :
-      ### 📇 Cartes Mémoire (Flashcards)
-
-      **1. [Terme ou Concept]** 💡 *Définition* : [Définition claire et concise en 1 ou 2 phrases maximum]
-
-      **2. [Terme ou Concept]** 💡 *Définition* : [Définition]
-      
-      (Continuer pour toutes les cartes)`;
+      [
+        {
+          "front": "Terme ou Concept / Question courte",
+          "back": "Définition claire et concise en 1 ou 2 phrases maximum"
+        }
+      ]`;
     } else if (selectedTool === "simplify") {
       prompt = `Analyse le document et/ou l'image fourni en pièce jointe pour en faire une synthèse et une vulgarisation poussée.
       
@@ -150,52 +336,36 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
       Consignes : 
       - Fais un résumé concis en quelques points clés.
       - Ensuite, réécris le concept général comme si tu devais l'expliquer à un enfant de 10 ans, en utilisant une métaphore ou une analogie pour rendre l'idée abstraite très visuelle et facile à comprendre.
-      - Format de sortie STRICTEMENT en Markdown.
+      - Format de sortie STRICTEMENT en JSON brut, SANS aucune balise Markdown (pas de \`\`\`json) ni texte supplémentaire.
       
       Format attendu :
-      ### 📊 Résumé Express
-      - [Point clé 1]
-      - [Point clé 2]
-      - [Point clé 3]
-
-      ---
-      ### 👶 Explication simplifiée (Niveau 10 ans)
-      [Insérer la métaphore et l'explication très accessible ici.]`;
+      {
+        "summary": ["Point clé 1", "Point clé 2", "Point clé 3"],
+        "analogy": "Insérer la métaphore et l'explication très accessible ici."
+      }`;
     }
 
     try {
       const text = await generateWithRetry(prompt, fileInlineData);
-      setResult(text || "Aucune réponse générée.");
+      
+      // Nettoyage des balises Markdown (ex: ```json ... ```) si l'IA en renvoie quand même
+      let cleanText = text || "";
+      cleanText = cleanText.replace(/```(json)?|```/gi, '').trim();
+      
+      try {
+        const parsedData = JSON.parse(cleanText);
+        setInteractiveData(parsedData);
+      } catch (e) {
+        setError("L'IA a généré une réponse, mais le format JSON est invalide. Veuillez réessayer.");
+        console.error("JSON Parse Error:", e, text);
+      }
+
     } catch (err) {
       setError("Erreur lors de la génération. " + err.message);
     } finally {
       setLoading(false);
     }
   };
-
-  const renderMarkdown = (text) => {
-    if (!text) return null;
-    const lines = text.split('\n');
-    let html = [];
-    lines.forEach((line, idx) => {
-      if (line.startsWith('### ')) { html.push(<h3 key={idx} className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-bold mt-4 mb-2">{line.substring(4).replace(/\*\*/g, '')}</h3>); }
-      else if (line.startsWith('## ')) { html.push(<h2 key={idx} className="font-bold mt-4 mb-2 text-slate-900 dark:text-white">{line.substring(3).replace(/\*\*/g, '')}</h2>); }
-      else if (line.startsWith('# ')) { html.push(<h1 key={idx} className="font-bold mt-4 mb-2 text-xl text-slate-900 dark:text-white">{line.substring(2).replace(/\*\*/g, '')}</h1>); }
-      else if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-        html.push(<li key={idx} dangerouslySetInnerHTML={{__html: parseInline(line.substring(2))}} className="ml-4 mb-2 text-slate-900 dark:text-white" />);
-      }
-      else if (line.startsWith('---')) { html.push(<hr key={idx} className="my-6 border-slate-200 dark:border-white/10" />); }
-      else if (line.startsWith('**') && line.endsWith('**')) {
-        html.push(<p key={idx} className="font-bold mt-4 text-slate-900 dark:text-white">{line.replace(/\*\*/g, '')}</p>);
-      }
-      else if (line.trim() !== "") {
-        html.push(<p key={idx} dangerouslySetInnerHTML={{__html: parseInline(line)}} className="mb-2 text-slate-900 dark:text-white" />);
-      }
-    });
-    return <div className="prose max-w-none">{html}</div>;
-  };
-
-  const parseInline = (text) => text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full min-h-[600px]">
@@ -207,7 +377,6 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
 
         <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-5">
           
-          {/* SÉLECTION DE L'OUTIL IA */}
           <div className="space-y-3">
             <label className="text-sm font-medium text-slate-500 dark:text-white/60 flex items-center gap-2">
               <Layers size={16} /> Outil Pédagogique
@@ -222,7 +391,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
                 </div>
                 <div>
                   <div className="font-bold text-sm">Générateur de Quiz</div>
-                  <div className="text-xs opacity-70">QCM avec corrections</div>
+                  <div className="text-xs opacity-70">QCM interactif</div>
                 </div>
               </button>
 
@@ -235,7 +404,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
                 </div>
                 <div>
                   <div className="font-bold text-sm">Cartes Mémoire</div>
-                  <div className="text-xs opacity-70">Concepts clés & flashcards</div>
+                  <div className="text-xs opacity-70">Flashcards interactives</div>
                 </div>
               </button>
 
@@ -248,7 +417,7 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
                 </div>
                 <div>
                   <div className="font-bold text-sm">Synthèse & Simplification</div>
-                  <div className="text-xs opacity-70">Résumé et niveau "10 ans"</div>
+                  <div className="text-xs opacity-70">Résumé et analogie "10 ans"</div>
                 </div>
               </button>
             </div>
@@ -325,11 +494,11 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
       </div>
 
       <div className="col-span-1 lg:col-span-2 bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-8 overflow-y-auto relative h-[600px] lg:h-auto">
-        {!result && !loading && !error && (
+        {!interactiveData && !loading && !error && (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-500 dark:text-white/60 p-6 text-center">
             <Sparkles size={64} className="mb-4 opacity-50 text-slate-900 dark:text-white" />
             <p className="text-lg font-medium">Sélectionnez un outil, une source et lancez la génération.</p>
-            <p className="text-sm mt-2">Le matériel pédagogique généré s'affichera ici.</p>
+            <p className="text-sm mt-2">Le matériel pédagogique interactif s'affichera ici.</p>
           </div>
         )}
 
@@ -346,9 +515,11 @@ const AiStudio = ({ classes, courses, customApiKey, selectedModel }) => {
           </div>
         )}
 
-        {result && !loading && (
-          <div className="animate-in slide-in-from-bottom-4 duration-500">
-            {renderMarkdown(result)}
+        {interactiveData && !loading && (
+          <div className="h-full">
+            {selectedTool === 'quiz' && <VirtualQuiz data={interactiveData} />}
+            {selectedTool === 'flashcards' && <FlashcardGrid data={interactiveData} />}
+            {selectedTool === 'simplify' && <SummaryInteractive data={interactiveData} />}
           </div>
         )}
       </div>
