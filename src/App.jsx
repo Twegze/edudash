@@ -167,25 +167,41 @@ export default function App() {
     fetchModels();
   }, [customApiKey]);
 
-  const [classes, setClasses] = useState([
-    { id: 'c1', name: '4ème A', students: "Jade\nRaphaël\nLouis\nInès\nLucas\nChloé\nHugo\nAntoine\nNathan\nCamille\nManon\nEmma\nSarah\nLéa\nThéo" },
-    { id: 'c2', name: '3ème B', students: "Alice\nBob\nCharlie\nDiana\nÉric\nFatima\nGabriel" }
-  ]);
+  const [classes, setClasses] = useState(() => {
+    const saved = localStorage.getItem('eduDash_classes');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Erreur parsing eduDash_classes", e);
+      }
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('eduDash_classes', JSON.stringify(classes));
+  }, [classes]);
 
   const updateClassStudents = (classId, studentsText) => {
     setClasses(classes.map(c => c.id === classId ? { ...c, students: studentsText } : c));
   };
 
-  const [courses, setCourses] = useState([
-    { 
-      id: 'doc1', classId: 'c1', 
-      title: 'Introduction à la Révolution Industrielle', 
-      content: "La révolution industrielle désigne le processus historique du XIXe siècle qui fait basculer une société à dominante agraire et artisanale vers une société commerciale et industrielle. Elle commence en Grande-Bretagne avec l'invention de la machine à vapeur par James Watt.", 
-      date: new Date().toISOString().split('T')[0],
-      file: null
+  const [courses, setCourses] = useState(() => {
+    const saved = localStorage.getItem('eduDash_courses');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Erreur parsing eduDash_courses", e);
+      }
     }
-  ]);
+    return [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem('eduDash_courses', JSON.stringify(courses));
+  }, [courses]);
   // Apply Theme (Gradient & Mode)
   useEffect(() => {
     const root = document.documentElement;
