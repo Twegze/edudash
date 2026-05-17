@@ -1,9 +1,77 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, ChevronRight, CheckCircle2, X, Plus, Calendar, FileText, Search, Paperclip, BookOpen, Trash2, UploadCloud, Tag, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Users, ChevronRight, CheckCircle2, X, Plus, Calendar, FileText, Search, Paperclip, BookOpen, Trash2, UploadCloud, Tag, AlertCircle, ChevronDown, ChevronUp, Edit2, Save } from 'lucide-react';
 import FilePreviewCard from '../common/FilePreviewCard';
 
-const CourseCard = ({ course, categoryName, onDelete }) => {
+const CourseCard = ({ course, categoryName, categories, onDelete, onEdit }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({
+    title: course.title,
+    categoryId: course.categoryId || "",
+    date: course.date,
+    content: course.content || ""
+  });
+
+  if (isEditing) {
+    return (
+      <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 group relative animate-in fade-in flex flex-col gap-4 shrink-0">
+        <h3 className="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+          <Edit2 size={20} /> Modifier le cours
+        </h3>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="text" placeholder="Titre du cours..." required
+            value={editData.title} onChange={(e) => setEditData({...editData, title: e.target.value})}
+            className="flex-1 bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none"
+          />
+          <select
+            value={editData.categoryId}
+            onChange={(e) => setEditData({...editData, categoryId: e.target.value})}
+            required
+            className="bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none min-w-[200px]"
+          >
+            <option value="" disabled>Choisir la catégorie</option>
+            {categories.map(cat => (
+              <option key={cat.id} value={cat.id} className="text-slate-900">{cat.name}</option>
+            ))}
+          </select>
+          <input 
+            type="date" required
+            value={editData.date} onChange={(e) => setEditData({...editData, date: e.target.value})}
+            className="bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none"
+          />
+        </div>
+        <textarea 
+          placeholder="Contenu du cours ou résumé..." rows="3"
+          value={editData.content} onChange={(e) => setEditData({...editData, content: e.target.value})}
+          className="w-full bg-white/90 dark:bg-white/5 p-3 rounded-2xl border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white focus:ring-2 focus:ring-slate-400 dark:focus:ring-white outline-none resize-none"
+        />
+        <div className="flex justify-end gap-2 mt-2">
+          <button 
+            type="button" 
+            onClick={() => {
+              setIsEditing(false);
+              setEditData({ title: course.title, categoryId: course.categoryId || "", date: course.date, content: course.content || "" });
+            }} 
+            className="px-4 py-2 rounded-full font-medium text-slate-500 dark:text-white/60 hover:bg-slate-200 dark:hover:bg-white/5 transition-colors"
+          >
+            Annuler
+          </button>
+          <button 
+            type="button" 
+            disabled={!editData.title.trim() || !editData.categoryId} 
+            onClick={() => {
+              onEdit(course.id, editData);
+              setIsEditing(false);
+            }} 
+            className="px-6 py-2 rounded-full font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-all"
+          >
+            <Save size={18} /> Enregistrer
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4 shrink-0">
@@ -23,7 +91,7 @@ const CourseCard = ({ course, categoryName, onDelete }) => {
             {isExpanded ? <ChevronUp size={20} className="text-slate-400 ml-1 transition-transform" /> : <ChevronDown size={20} className="text-slate-400 ml-1 transition-transform" />}
           </h3>
         </div>
-        <span className="text-xs font-medium px-3 py-1 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white rounded-full flex items-center gap-1 mr-10">
+        <span className="text-xs font-medium px-3 py-1 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white rounded-full flex items-center gap-1 mr-20">
           <Calendar size={12} /> {new Date(course.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
         </span>
       </div>
@@ -43,17 +111,29 @@ const CourseCard = ({ course, categoryName, onDelete }) => {
         </div>
       )}
 
-      {/* Delete Button - Absolute positioned, visible on hover */}
-      <button 
-        onClick={(e) => {
-          e.stopPropagation(); // Prevent expanding/collapsing when clicking delete
-          onDelete(course.id);
-        }}
-        className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 z-10"
-        title="Supprimer ce cours"
-      >
-        <Trash2 size={16} />
-      </button>
+      {/* Action Buttons - Absolute positioned, visible on hover */}
+      <div className="absolute top-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsEditing(true);
+          }}
+          className="p-2 text-slate-500 dark:text-white/60 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 transition-colors"
+          title="Modifier ce cours"
+        >
+          <Edit2 size={16} />
+        </button>
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete(course.id);
+          }}
+          className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 transition-colors"
+          title="Supprimer ce cours"
+        >
+          <Trash2 size={16} />
+        </button>
+      </div>
     </div>
   );
 };
@@ -173,6 +253,10 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
 
   const deleteCourse = (id) => {
     setCourses(courses.filter(c => c.id !== id));
+  };
+
+  const editCourse = (id, updatedCourse) => {
+    setCourses(courses.map(c => c.id === id ? { ...c, ...updatedCourse } : c));
   };
 
   const filteredCourses = classCourses
@@ -499,7 +583,9 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                           key={course.id} 
                           course={course} 
                           categoryName={categoryName} 
+                          categories={categories}
                           onDelete={deleteCourse} 
+                          onEdit={editCourse}
                         />
                       );
                     })
