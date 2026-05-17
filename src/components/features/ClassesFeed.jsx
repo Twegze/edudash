@@ -1,6 +1,62 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, ChevronRight, CheckCircle2, X, Plus, Calendar, FileText, Search, Paperclip, BookOpen, Trash2, UploadCloud, Tag, AlertCircle } from 'lucide-react';
+import { Users, ChevronRight, CheckCircle2, X, Plus, Calendar, FileText, Search, Paperclip, BookOpen, Trash2, UploadCloud, Tag, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import FilePreviewCard from '../common/FilePreviewCard';
+
+const CourseCard = ({ course, categoryName, onDelete }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4 shrink-0">
+      
+      {/* Clickable Header */}
+      <div 
+        className="flex justify-between items-start flex-wrap gap-2 cursor-pointer select-none"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <div className="flex flex-col gap-1">
+          <span className="text-xs font-semibold px-3 py-1 bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 dark:text-purple-300 rounded-full flex items-center gap-1 w-fit border border-purple-500/20">
+            <Tag size={12} /> {categoryName}
+          </span>
+          <h3 className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 flex items-center gap-2 mt-1 transition-all">
+            {course.file ? <Paperclip size={18} className="opacity-50 text-slate-900 dark:text-white" /> : <BookOpen size={18} className="opacity-50 text-slate-900 dark:text-white" />}
+            {course.title}
+            {isExpanded ? <ChevronUp size={20} className="text-slate-400 ml-1 transition-transform" /> : <ChevronDown size={20} className="text-slate-400 ml-1 transition-transform" />}
+          </h3>
+        </div>
+        <span className="text-xs font-medium px-3 py-1 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white rounded-full flex items-center gap-1 mr-10">
+          <Calendar size={12} /> {new Date(course.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
+        </span>
+      </div>
+
+      {/* Expandable Content */}
+      {isExpanded && (
+        <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-top-2 duration-200 mt-2">
+          {course.content && (
+            <div className="text-slate-900 dark:text-white bg-white/90 dark:bg-white/5 p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-slate-300 dark:border-white/10">
+              {course.content}
+            </div>
+          )}
+
+          {course.file && (
+             <FilePreviewCard file={course.file} />
+          )}
+        </div>
+      )}
+
+      {/* Delete Button - Absolute positioned, visible on hover */}
+      <button 
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent expanding/collapsing when clicking delete
+          onDelete(course.id);
+        }}
+        className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 z-10"
+        title="Supprimer ce cours"
+      >
+        <Trash2 size={16} />
+      </button>
+    </div>
+  );
+};
 
 const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStudents }) => {
   const [selectedClassId, setSelectedClassId] = useState(classes[0]?.id || null);
@@ -439,40 +495,12 @@ const ClassesFeed = ({ classes, setClasses, courses, setCourses, updateClassStud
                       const categoryName = categories.find(c => c.id === course.categoryId)?.name || "Général";
                       
                       return (
-                        <div key={course.id} className="bg-white/80 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl p-6 group relative animate-in fade-in slide-in-from-bottom-4 flex flex-col gap-4 shrink-0">
-                          <div className="flex justify-between items-start flex-wrap gap-2">
-                            <div className="flex flex-col gap-1">
-                              <span className="text-xs font-semibold px-3 py-1 bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-600 dark:text-purple-300 rounded-full flex items-center gap-1 w-fit border border-purple-500/20">
-                                <Tag size={12} /> {categoryName}
-                              </span>
-                              <h3 className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 flex items-center gap-2 mt-1">
-                                {course.file ? <Paperclip size={18} className="opacity-50 text-slate-900 dark:text-white" /> : <BookOpen size={18} className="opacity-50 text-slate-900 dark:text-white" />}
-                                {course.title}
-                              </h3>
-                            </div>
-                            <span className="text-xs font-medium px-3 py-1 bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white rounded-full flex items-center gap-1">
-                              <Calendar size={12} /> {new Date(course.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
-                            </span>
-                          </div>
-
-                          {course.content && (
-                            <div className="text-slate-900 dark:text-white bg-white/90 dark:bg-white/5 p-4 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap border border-slate-300 dark:border-white/10">
-                              {course.content}
-                            </div>
-                          )}
-
-                          {course.file && (
-                             <FilePreviewCard file={course.file} />
-                          )}
-
-                          <button 
-                            onClick={() => deleteCourse(course.id)}
-                            className="absolute top-4 right-4 p-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl bg-white/90 dark:bg-white/5 border border-slate-300 dark:border-white/10"
-                            title="Supprimer ce cours"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
+                        <CourseCard 
+                          key={course.id} 
+                          course={course} 
+                          categoryName={categoryName} 
+                          onDelete={deleteCourse} 
+                        />
                       );
                     })
                   )}
