@@ -9,6 +9,8 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
 
   if (!isOpen) return null;
 
+  const isDark = themeMode === 'dark' || (themeMode === 'auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
   const handleAddColor = () => {
     if (themeColors.length >= 5) return;
     const newColors = [...themeColors];
@@ -31,7 +33,7 @@ const ZenThemeModal = ({ isOpen, onClose, themeMode, setThemeMode, themeColors, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200 ${isDark ? 'dark' : ''}`}>
       <div 
         className="bg-white/95 dark:bg-[#18181b]/95 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl rounded-3xl w-full max-w-sm flex flex-col items-center p-6 relative overflow-hidden animate-in zoom-in-95 duration-300"
         style={{
